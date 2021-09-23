@@ -42,4 +42,7 @@ Pods/
 ## Mac OS X Finder
 .DS_Store
 
+## R.Swift
+*.generated.swift
+
 VulnerableData.swift
