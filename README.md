@@ -19,5 +19,5 @@ Information collection is done via OpenWeatherMap (http://openweathermap.org)
 - Kingfisher (Loading and cashing images)
 - SnapKit (Auto Layout)
 - SwiftLint (Code Style)
-- R.swift (Convenient resource containing)
+- R.swift (Convenient resource receiving)
 
