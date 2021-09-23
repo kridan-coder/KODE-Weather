@@ -24,3 +24,5 @@ struct APIRoutable: URLRequestConvertible {
     }
     
 }
+
+final class APIClient {}

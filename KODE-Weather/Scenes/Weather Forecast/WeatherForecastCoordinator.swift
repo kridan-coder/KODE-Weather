@@ -1,5 +1,5 @@
 //
-//  WorldMapCoordinator.swift
+//  WeatherForecastCoordinator.swift
 //  KODE-Weather
 //
 //  Created by Developer on 23.09.2021.
@@ -7,24 +7,17 @@
 
 import Foundation
 
-class WorldMapCoordinator {
+class WeatherForecastCoordinator {
     
     // MARK: - Types
     
     typealias Dependencies = HasAPIClientProvider
     
-    // MARK: - Properties
-    
-    let dependencies: Dependencies
-    
+    // MARK: - Properties (сначала идут публичные, потом приватные)
+    // MARK: - IBOutlets (всегда приватные)
     // MARK: - Init
-    
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
-    }
-    
     // MARK: - Lifecycle
     // MARK: - Public Methods
+    // MARK: - Actions (@ojbc + @IBActions)
     // MARK: - Private Methods
-
 }

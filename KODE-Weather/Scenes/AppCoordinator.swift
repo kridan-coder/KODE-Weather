@@ -9,15 +9,27 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     
-    var childCoordinators: [Coordinator] = []
+    // MARK: - Properties
     
-    var navigationController: UINavigationController = UINavigationController()
+    let dependencies: AppDependencies
+    
+    var childCoordinators: [Coordinator]
+    
+    var navigationController: UINavigationController
     
     private let window: UIWindow
     
+    // MARK: - Init
+    
     init(window: UIWindow) {
         self.window = window
+        
+        dependencies = AppDependencies(apiClient: APIClient())
+        childCoordinators = []
+        navigationController = UINavigationController()
     }
+    
+    // MARK: - Lifecycle
     
     func start() {
         window.rootViewController = navigationController
@@ -26,8 +38,12 @@ final class AppCoordinator: Coordinator {
         showWorldMapScene()
     }
     
+    // MARK: - Private Methods
+    
     private func showWorldMapScene() {
-        // TODO: - create and start Scene
+        let worldMapCoordinator = WorldMapCoordinator(dependencies: dependencies)
+        
+        // TODO: - Start Scene
     }
     
 }
