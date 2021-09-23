@@ -13,6 +13,10 @@
 		448818F426F8B04600BE32C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448818F226F8B04600BE32C7 /* LaunchScreen.storyboard */; };
 		4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6026FC73FC0009976A /* VulnerableData.swift */; };
 		4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6226FC747B0009976A /* AppCoordinator.swift */; };
+		4496CD6B26FC912D0009976A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6A26FC912D0009976A /* Coordinator.swift */; };
+		4496CD6D26FC9D770009976A /* WorldMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6C26FC9D770009976A /* WorldMapCoordinator.swift */; };
+		4496CD7026FCA1560009976A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6F26FCA1560009976A /* APIClient.swift */; };
+		4496CD7826FCA70C0009976A /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD7726FCA70C0009976A /* R.generated.swift */; };
 		F55440DBBD915E26956AA552 /* Pods_KODE_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6E077A70563E03CE1E4D00 /* Pods_KODE_Weather.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +29,10 @@
 		448818F526F8B04600BE32C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4496CD6026FC73FC0009976A /* VulnerableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VulnerableData.swift; sourceTree = "<group>"; };
 		4496CD6226FC747B0009976A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		4496CD6A26FC912D0009976A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		4496CD6C26FC9D770009976A /* WorldMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapCoordinator.swift; sourceTree = "<group>"; };
+		4496CD6F26FCA1560009976A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		4496CD7726FCA70C0009976A /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		4CD7AE34A23AD36A0CF9B152 /* Pods-KODE-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KODE-Weather.debug.xcconfig"; path = "Target Support Files/Pods-KODE-Weather/Pods-KODE-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		9989E09712A0CB5AE98C2FAA /* Pods-KODE-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KODE-Weather.release.xcconfig"; path = "Target Support Files/Pods-KODE-Weather/Pods-KODE-Weather.release.xcconfig"; sourceTree = "<group>"; };
 		BB6E077A70563E03CE1E4D00 /* Pods_KODE_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KODE_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +53,7 @@
 		448818DB26F8B04300BE32C7 = {
 			isa = PBXGroup;
 			children = (
+				4496CD7626FCA6EF0009976A /* Resources */,
 				448818E626F8B04300BE32C7 /* KODE-Weather */,
 				448818E526F8B04300BE32C7 /* Products */,
 				912F0D9862F669B27B8639BC /* Pods */,
@@ -66,7 +75,7 @@
 			children = (
 				4496CD6426FC77120009976A /* Scenes */,
 				4496CD6526FC771A0009976A /* Support */,
-				4496CD6626FC772E0009976A /* Constants */,
+				4496CD7426FCA41C0009976A /* Constants */,
 				448818E726F8B04300BE32C7 /* AppDelegate.swift */,
 				448818E926F8B04300BE32C7 /* SceneDelegate.swift */,
 				448818F026F8B04600BE32C7 /* Assets.xcassets */,
@@ -89,21 +98,16 @@
 		4496CD6526FC771A0009976A /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				4496CD6E26FCA10E0009976A /* API Client */,
+				4496CD6A26FC912D0009976A /* Coordinator.swift */,
 			);
 			path = Support;
-			sourceTree = "<group>";
-		};
-		4496CD6626FC772E0009976A /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				4496CD6026FC73FC0009976A /* VulnerableData.swift */,
-			);
-			path = Constants;
 			sourceTree = "<group>";
 		};
 		4496CD6726FC7DFB0009976A /* World Map */ = {
 			isa = PBXGroup;
 			children = (
+				4496CD6C26FC9D770009976A /* WorldMapCoordinator.swift */,
 			);
 			path = "World Map";
 			sourceTree = "<group>";
@@ -113,6 +117,30 @@
 			children = (
 			);
 			path = "Weather Forecast";
+			sourceTree = "<group>";
+		};
+		4496CD6E26FCA10E0009976A /* API Client */ = {
+			isa = PBXGroup;
+			children = (
+				4496CD6F26FCA1560009976A /* APIClient.swift */,
+			);
+			path = "API Client";
+			sourceTree = "<group>";
+		};
+		4496CD7426FCA41C0009976A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4496CD6026FC73FC0009976A /* VulnerableData.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		4496CD7626FCA6EF0009976A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4496CD7726FCA70C0009976A /* R.generated.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		912F0D9862F669B27B8639BC /* Pods */ = {
@@ -140,6 +168,7 @@
 			buildConfigurationList = 448818F826F8B04600BE32C7 /* Build configuration list for PBXNativeTarget "KODE-Weather" */;
 			buildPhases = (
 				C86CDDEA0631CDAD87CA5232 /* [CP] Check Pods Manifest.lock */,
+				4496CD7126FCA2B00009976A /* R.Swift */,
 				448818E026F8B04300BE32C7 /* Sources */,
 				448818E126F8B04300BE32C7 /* Frameworks */,
 				448818E226F8B04300BE32C7 /* Resources */,
@@ -218,6 +247,26 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		4496CD7126FCA2B00009976A /* R.Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = R.Swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/Resources/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Resources/R.generated.swift\"\n";
+		};
 		C86CDDEA0631CDAD87CA5232 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,8 +314,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */,
+				4496CD7026FCA1560009976A /* APIClient.swift in Sources */,
 				4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */,
+				4496CD7826FCA70C0009976A /* R.generated.swift in Sources */,
+				4496CD6B26FC912D0009976A /* Coordinator.swift in Sources */,
 				448818E826F8B04300BE32C7 /* AppDelegate.swift in Sources */,
+				4496CD6D26FC9D770009976A /* WorldMapCoordinator.swift in Sources */,
 				448818EA26F8B04300BE32C7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

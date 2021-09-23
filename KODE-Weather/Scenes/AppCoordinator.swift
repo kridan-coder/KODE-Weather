@@ -7,12 +7,27 @@
 
 import UIKit
 
-final class AppCoordinator {
+final class AppCoordinator: Coordinator {
+    
+    var childCoordinators: [Coordinator] = []
+    
+    var navigationController: UINavigationController = UINavigationController()
+    
+    private let window: UIWindow
+    
     init(window: UIWindow) {
-        // TODO: - Create window property and set it to the received
+        self.window = window
     }
     
     func start() {
-        // TODO: - setup start func (setup and start Scene)
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+        
+        showWorldMapScene()
     }
+    
+    private func showWorldMapScene() {
+        // TODO: - create and start Scene
+    }
+    
 }
