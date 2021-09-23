@@ -1,5 +1,5 @@
 # KODE-Weather
-App for getting weather forecast anywhere.
+App for getting weather forecast anywhere on map.
 
 This project is done following the rules of test task by KODE for iOS-developers before they start making real ones.
 
