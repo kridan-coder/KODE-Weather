@@ -8,14 +8,13 @@
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    
     // MARK: - Properties
     
     let dependencies: AppDependencies
     
     var childCoordinators: [Coordinator]
     
-    var navigationController: UINavigationController
+    var rootNavigationController: UINavigationController
     
     private let window: UIWindow
     
@@ -26,13 +25,15 @@ final class AppCoordinator: Coordinator {
         
         dependencies = AppDependencies(apiClient: APIClient())
         childCoordinators = []
-        navigationController = UINavigationController()
+        
+        rootNavigationController = UINavigationController()
+        setupRootNavigationController()
     }
     
     // MARK: - Lifecycle
     
     func start() {
-        window.rootViewController = navigationController
+        window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()
         
         showWorldMapScene()
@@ -41,9 +42,16 @@ final class AppCoordinator: Coordinator {
     // MARK: - Private Methods
     
     private func showWorldMapScene() {
-        let worldMapCoordinator = WorldMapCoordinator(dependencies: dependencies)
-        
-        // TODO: - Start Scene
+        let worldMapCoordinator = WorldMapCoordinator(dependencies: dependencies, navigationController: rootNavigationController)
+        childCoordinators.append(worldMapCoordinator)
+        worldMapCoordinator.start()
+    }
+    
+    private func setupRootNavigationController() {
+        rootNavigationController.navigationBar.isTranslucent = false
+        rootNavigationController.navigationBar.barTintColor = .white
+        rootNavigationController.navigationBar.backgroundColor = .white
+        rootNavigationController.navigationBar.addShadow()
     }
     
 }

@@ -7,10 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		446C7C8A26FDB0D100AD0B67 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446C7C8C26FDB0D100AD0B67 /* Localizable.strings */; };
+		446C7C9226FDB23B00AD0B67 /* WorldMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9126FDB23B00AD0B67 /* WorldMapViewController.swift */; };
+		446C7C9426FDB24700AD0B67 /* WorldMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9326FDB24700AD0B67 /* WorldMapViewModel.swift */; };
+		446C7C9626FDBD5F00AD0B67 /* PickPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9526FDBD5F00AD0B67 /* PickPlaceView.swift */; };
+		446C7C9826FDC43500AD0B67 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9726FDC43500AD0B67 /* MapView.swift */; };
+		446C7C9A26FDC50300AD0B67 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9926FDC50300AD0B67 /* MapViewModel.swift */; };
 		448818E826F8B04300BE32C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448818E726F8B04300BE32C7 /* AppDelegate.swift */; };
 		448818EA26F8B04300BE32C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448818E926F8B04300BE32C7 /* SceneDelegate.swift */; };
 		448818F126F8B04600BE32C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448818F026F8B04600BE32C7 /* Assets.xcassets */; };
 		448818F426F8B04600BE32C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448818F226F8B04600BE32C7 /* LaunchScreen.storyboard */; };
+		44921B232701BC080028E2BE /* UIViewAddons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B222701BC080028E2BE /* UIViewAddons.swift */; };
+		44921B252701BD610028E2BE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B242701BD610028E2BE /* Constants.swift */; };
+		44921B272701BDE10028E2BE /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B262701BDE10028E2BE /* UIColor+AppColors.swift */; };
+		44921B292701CCD70028E2BE /* MKMapViewAddons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B282701CCD70028E2BE /* MKMapViewAddons.swift */; };
+		44921B2B2701DA3B0028E2BE /* PickPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2A2701DA3B0028E2BE /* PickPlaceViewModel.swift */; };
+		44921B2D2701DCA20028E2BE /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2C2701DCA20028E2BE /* UIFont+AppFonts.swift */; };
+		44921B2F2701DDFB0028E2BE /* UIImage+AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */; };
 		4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6026FC73FC0009976A /* VulnerableData.swift */; };
 		4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6226FC747B0009976A /* AppCoordinator.swift */; };
 		4496CD6B26FC912D0009976A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6A26FC912D0009976A /* Coordinator.swift */; };
@@ -23,12 +36,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		446C7C8B26FDB0D100AD0B67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		446C7C9126FDB23B00AD0B67 /* WorldMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapViewController.swift; sourceTree = "<group>"; };
+		446C7C9326FDB24700AD0B67 /* WorldMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapViewModel.swift; sourceTree = "<group>"; };
+		446C7C9526FDBD5F00AD0B67 /* PickPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPlaceView.swift; sourceTree = "<group>"; };
+		446C7C9726FDC43500AD0B67 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		446C7C9926FDC50300AD0B67 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		448818E426F8B04300BE32C7 /* KODE-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KODE-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		448818E726F8B04300BE32C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		448818E926F8B04300BE32C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		448818F026F8B04600BE32C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		448818F326F8B04600BE32C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		448818F526F8B04600BE32C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44921B222701BC080028E2BE /* UIViewAddons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAddons.swift; sourceTree = "<group>"; };
+		44921B242701BD610028E2BE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		44921B262701BDE10028E2BE /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
+		44921B282701CCD70028E2BE /* MKMapViewAddons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewAddons.swift; sourceTree = "<group>"; };
+		44921B2A2701DA3B0028E2BE /* PickPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPlaceViewModel.swift; sourceTree = "<group>"; };
+		44921B2C2701DCA20028E2BE /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
+		44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AppImages.swift"; sourceTree = "<group>"; };
 		4496CD6026FC73FC0009976A /* VulnerableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VulnerableData.swift; sourceTree = "<group>"; };
 		4496CD6226FC747B0009976A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		4496CD6A26FC912D0009976A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -54,6 +80,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		446C7C8D26FDB1C500AD0B67 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				446C7C9526FDBD5F00AD0B67 /* PickPlaceView.swift */,
+				446C7C9726FDC43500AD0B67 /* MapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		446C7C8E26FDB1CD00AD0B67 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				446C7C9126FDB23B00AD0B67 /* WorldMapViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		446C7C8F26FDB1D600AD0B67 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				44921B2A2701DA3B0028E2BE /* PickPlaceViewModel.swift */,
+				446C7C9926FDC50300AD0B67 /* MapViewModel.swift */,
+				446C7C9326FDB24700AD0B67 /* WorldMapViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		446C7C9026FDB1DB00AD0B67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		448818DB26F8B04300BE32C7 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +164,8 @@
 			children = (
 				4496CD6A26FC912D0009976A /* Coordinator.swift */,
 				4496CD7B26FCA9100009976A /* Dependencies.swift */,
+				44921B222701BC080028E2BE /* UIViewAddons.swift */,
+				44921B282701CCD70028E2BE /* MKMapViewAddons.swift */,
 				4496CD6E26FCA10E0009976A /* API Client */,
 			);
 			path = Support;
@@ -113,6 +175,10 @@
 			isa = PBXGroup;
 			children = (
 				4496CD6C26FC9D770009976A /* WorldMapCoordinator.swift */,
+				446C7C8D26FDB1C500AD0B67 /* Views */,
+				446C7C8E26FDB1CD00AD0B67 /* ViewControllers */,
+				446C7C8F26FDB1D600AD0B67 /* ViewModels */,
+				446C7C9026FDB1DB00AD0B67 /* Models */,
 			);
 			path = "World Map";
 			sourceTree = "<group>";
@@ -137,6 +203,11 @@
 			isa = PBXGroup;
 			children = (
 				4496CD6026FC73FC0009976A /* VulnerableData.swift */,
+				446C7C8C26FDB0D100AD0B67 /* Localizable.strings */,
+				44921B242701BD610028E2BE /* Constants.swift */,
+				44921B262701BDE10028E2BE /* UIColor+AppColors.swift */,
+				44921B2C2701DCA20028E2BE /* UIFont+AppFonts.swift */,
+				44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -173,13 +244,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 448818F826F8B04600BE32C7 /* Build configuration list for PBXNativeTarget "KODE-Weather" */;
 			buildPhases = (
+				4496CD6926FC82A80009976A /* SwiftLint */,
 				C86CDDEA0631CDAD87CA5232 /* [CP] Check Pods Manifest.lock */,
 				4496CD7126FCA2B00009976A /* R.Swift */,
 				448818E026F8B04300BE32C7 /* Sources */,
 				448818E126F8B04300BE32C7 /* Frameworks */,
 				448818E226F8B04300BE32C7 /* Resources */,
 				E992ABE5BE1BA13F53C8121D /* [CP] Embed Pods Frameworks */,
-				4496CD6926FC82A80009976A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -229,6 +300,7 @@
 			files = (
 				448818F426F8B04600BE32C7 /* LaunchScreen.storyboard in Resources */,
 				448818F126F8B04600BE32C7 /* Assets.xcassets in Resources */,
+				446C7C8A26FDB0D100AD0B67 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,21 +392,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */,
+				44921B252701BD610028E2BE /* Constants.swift in Sources */,
+				44921B2B2701DA3B0028E2BE /* PickPlaceViewModel.swift in Sources */,
 				4496CD7026FCA1560009976A /* APIClient.swift in Sources */,
 				4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */,
 				4496CD7A26FCA8740009976A /* WeatherForecastCoordinator.swift in Sources */,
+				44921B272701BDE10028E2BE /* UIColor+AppColors.swift in Sources */,
+				446C7C9626FDBD5F00AD0B67 /* PickPlaceView.swift in Sources */,
 				4496CD7826FCA70C0009976A /* R.generated.swift in Sources */,
 				4496CD6B26FC912D0009976A /* Coordinator.swift in Sources */,
+				446C7C9826FDC43500AD0B67 /* MapView.swift in Sources */,
+				446C7C9226FDB23B00AD0B67 /* WorldMapViewController.swift in Sources */,
 				448818E826F8B04300BE32C7 /* AppDelegate.swift in Sources */,
+				446C7C9426FDB24700AD0B67 /* WorldMapViewModel.swift in Sources */,
+				44921B292701CCD70028E2BE /* MKMapViewAddons.swift in Sources */,
+				446C7C9A26FDC50300AD0B67 /* MapViewModel.swift in Sources */,
+				44921B2D2701DCA20028E2BE /* UIFont+AppFonts.swift in Sources */,
 				4496CD6D26FC9D770009976A /* WorldMapCoordinator.swift in Sources */,
 				4496CD7C26FCA9100009976A /* Dependencies.swift in Sources */,
 				448818EA26F8B04300BE32C7 /* SceneDelegate.swift in Sources */,
+				44921B232701BC080028E2BE /* UIViewAddons.swift in Sources */,
+				44921B2F2701DDFB0028E2BE /* UIImage+AppImages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		446C7C8C26FDB0D100AD0B67 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				446C7C8B26FDB0D100AD0B67 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		448818F226F8B04600BE32C7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -381,6 +473,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -442,6 +535,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 73S8J9N7ZU;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

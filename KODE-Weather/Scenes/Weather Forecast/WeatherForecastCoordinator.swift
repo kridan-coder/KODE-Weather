@@ -8,7 +8,6 @@
 import Foundation
 
 class WeatherForecastCoordinator {
-    
     // MARK: - Types
     
     typealias Dependencies = HasAPIClientProvider
