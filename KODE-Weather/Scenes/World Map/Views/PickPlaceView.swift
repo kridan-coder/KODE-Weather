@@ -9,16 +9,13 @@ import UIKit
 import SnapKit
 
 final class PickPlaceView: UIView {
-    
-    // MARK: - Types
     // MARK: - Properties
-    
     private var viewModel: PickPlaceViewModel?
     
-    var showWeatherButton: UIButton
-    var cancelButton: UIButton
-    var placeNameLabel: UILabel
-    var placeCoordinatesLabel: UILabel
+    private var showWeatherButton: UIButton
+    private var cancelButton: UIButton
+    private var placeNameLabel: UILabel
+    private var placeCoordinatesLabel: UILabel
     
     // MARK: - Init
     init() {
@@ -27,6 +24,8 @@ final class PickPlaceView: UIView {
         placeNameLabel = UILabel()
         placeCoordinatesLabel = UILabel()
         super.init(frame: CGRect.zero)
+        cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+        showWeatherButton.addTarget(self, action: #selector(showWeatherButtonPressed), for: .touchUpInside)
         initializeUI()
         createConstraints()
     }
@@ -40,17 +39,37 @@ final class PickPlaceView: UIView {
     // MARK: - Public Methods
     func configure(with viewModel: PickPlaceViewModel) {
         self.viewModel = viewModel
+        setupData(showWeatherButtonTitle: viewModel.data.showWeatherButtonTitle,
+                  placeName: viewModel.data.placeName,
+                  placeCoordinates: viewModel.data.placeCoordinates)
+        
+        viewModel.dataUpdated = {
+            self.setupData(showWeatherButtonTitle: viewModel.data.showWeatherButtonTitle,
+                           placeName: viewModel.data.placeName,
+                           placeCoordinates: viewModel.data.placeCoordinates)
+        }
     }
     
-    // MARK: - Actions (@ojbc + @IBActions)
+    // MARK: - Actions
+    
+    @objc private func cancelButtonPressed() {
+        viewModel?.didPressCancelButton?()
+    }
+    
+    @objc private func showWeatherButtonPressed() {
+        viewModel?.didPressShowWeatherButton?()
+    }
+    
     // MARK: - Private Methods
     
+    private func setupData(showWeatherButtonTitle: String, placeName: String, placeCoordinates: String) {
+        showWeatherButton.setTitle(showWeatherButtonTitle, for: .normal)
+        placeNameLabel.text = placeName
+        placeCoordinatesLabel.text = placeCoordinates
+    }
+    
     private func initializeUI() {
-        backgroundColor = .white
-        self.layer.cornerRadius = Constants.PickCityView.cornerRadius
-        self.addShadow(opacity: Constants.PickCityView.shadowOpacity,
-                       offset: Constants.PickCityView.shadowOffset,
-                       radius: Constants.PickCityView.shadowRadius)
+        setupMainViewUI()
         setupShowWeatherButtonUI()
         setupCancelButtonUI()
         setupPlaceNameLabelUI()
@@ -69,13 +88,21 @@ final class PickPlaceView: UIView {
         createPlaceCoordinatesLabelConstraints()
     }
     
+    private func setupMainViewUI() {
+        backgroundColor = .mainColor
+        self.layer.cornerRadius = Constants.PickCityView.cornerRadius
+        self.addShadow(opacity: Constants.PickCityView.shadowOpacity,
+                       offset: Constants.PickCityView.shadowOffset,
+                       radius: Constants.PickCityView.shadowRadius)
+    }
+    
     private func setupShowWeatherButtonUI() {
         showWeatherButton.backgroundColor = .none
         showWeatherButton.titleLabel?.font = UIFont.classic
-        showWeatherButton.setTitleColor(.blue, for: .normal)
+        showWeatherButton.setTitleColor(.accentColor, for: .normal)
         showWeatherButton.layer.cornerRadius = Constants.ShowWeatherButton.cornerRadius
         showWeatherButton.layer.borderWidth = Constants.ShowWeatherButton.borderWidth
-        showWeatherButton.layer.borderColor = UIColor.blue.cgColor
+        showWeatherButton.layer.borderColor = UIColor.accentColor.cgColor
     }
     
     private func setupCancelButtonUI() {
@@ -83,18 +110,14 @@ final class PickPlaceView: UIView {
     }
     
     private func setupPlaceNameLabelUI() {
-//        placeNameLabel.adjustsFontSizeToFitWidth = true
-//        placeNameLabel.minimumScaleFactor = 0.5
         placeNameLabel.font = UIFont.big
         placeNameLabel.numberOfLines = Constants.PlaceNameLabel.linesAmount
     }
     
     private func setupPlaceCoordinatesLabelUI() {
-//        placeCoordinatesLabel.adjustsFontSizeToFitWidth = true
-//        placeCoordinatesLabel.minimumScaleFactor = 0.5
         placeCoordinatesLabel.font = UIFont.small
         placeCoordinatesLabel.numberOfLines = Constants.PlaceCoordinatesLabel.linesAmount
-        placeCoordinatesLabel.textColor = .lightGray
+        placeCoordinatesLabel.textColor = .secondaryColor
     }
     
     private func createShowWeatherButtonConstraints() {

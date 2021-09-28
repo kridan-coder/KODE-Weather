@@ -13,9 +13,24 @@ final class MapView: MKMapView {
     
     private var viewModel: MapViewModel?
     
+    // MARK: - Init
+    init() {
+        super.init(frame: CGRect.zero)
+        setupMapView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Public Methods
     func configure(with viewModel: MapViewModel) {
         self.viewModel = viewModel
     }
     
+    // MARK: - Private Methods
+    private func setupMapView() {
+        setCameraZoomRange(Constants.Map.maximumZoomRange, animated: false)
+        centerToLocation(Constants.Map.initialLocation)
+    }
 }

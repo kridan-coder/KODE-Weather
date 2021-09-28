@@ -8,22 +8,21 @@
 import Foundation
 
 class PickPlaceViewModel {
-    // MARK: - Types
-    
-    typealias Dependencies = HasAPIClientProvider
-    
     // MARK: - Properties
+    var dataUpdated: (() -> Void)?
     
-    weak var delegate: WorldMapViewModelDelegate?
+    var data: PickPlaceData {
+        didSet {
+            dataUpdated?()
+        }
+    }
     
-    var mapViewModel: MapViewModel = MapViewModel()
-    
-    private let dependencies: Dependencies
+    var didPressCancelButton: (() -> Void)?
+    var didPressShowWeatherButton: (() -> Void)?
     
     // MARK: - Init
-    
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(data: PickPlaceData) {
+        self.data = data
     }
     
 }

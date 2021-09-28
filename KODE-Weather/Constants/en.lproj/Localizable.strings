@@ -11,3 +11,14 @@
 "Wind" = "WIND";
 "Pressure" = "PRESSURE";
 "Map" = "Map";
+"ShowWeather" = "Show Weather";
+"Refresh" = "Refresh";
+"Okay" = "Okay";
+
+"NoSuchPlaceErrorTitle" = "No info found";
+"NoInternetErrorTitle" = "No Internet";
+"DefaultErrorTitle" = "Something went wrong";
+
+"NoInternetErrorDescription" = "Try refreshing the screen when communication is restored.";
+"DefaultErrorDescription" = "The problem is on our side, we are already looking into it. Please try refreshing the screen later.";
+"NoSuchPlaceErrorDescription" = "Could not find info about this place. Please try again.";

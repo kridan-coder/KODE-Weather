@@ -15,8 +15,11 @@ class WorldMapViewController: UIViewController {
     private let viewModel: WorldMapViewModel
     
     private let mapView: MKMapView
+    private let pickPlaceView: PickPlaceView
     
     private let searchController: UISearchController
+    
+    private var pickViewIsShown = false
     
     // MARK: - Init
     
@@ -24,6 +27,7 @@ class WorldMapViewController: UIViewController {
         self.viewModel = viewModel
         
         mapView = MapView()
+        pickPlaceView = PickPlaceView()
         searchController = UISearchController()
         
         super.init(nibName: nil, bundle: nil)
@@ -40,33 +44,64 @@ class WorldMapViewController: UIViewController {
         setupView()
         setupSearchController()
         setupGestureRecognizerForMap()
+        bindToViewModel()
     }
     
     // MARK: - Public Methods
     
     // MARK: - Actions
     
-    @IBAction func getCoordinatePressOnMap(sender: UITapGestureRecognizer) {
+    @IBAction private func getCoordinatePressOnMap(sender: UITapGestureRecognizer) {
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-        print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
+        viewModel.tappedAtLocation(locationCoordinate.clLocation)
+        self.pickViewIsShown = true
+
     }
     
     // MARK: - Private Methods
     
-    private func setupView() {
-        view.backgroundColor = .white
-        setupMapView()
-        
-        let pickPlaceView = PickPlaceView()
-        view.addSubview(pickPlaceView)
-        pickPlaceView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview().inset(20)
-            make.height.equalToSuperview().dividedBy(3.5)
+    private func bindToViewModel() {
+        viewModel.didFindPlace = { [weak self] in
+            self?.showPickPlaceView()
         }
-        pickPlaceView.showWeatherButton.setTitle("Show Weather", for: .normal)
-        pickPlaceView.placeNameLabel.text = "Amsterdam"
-        pickPlaceView.placeCoordinatesLabel.text = "45°16'44.7\"N 9°43'33.2\"E"
+        viewModel.needsPickPlaceViewHidden = { [weak self] in
+            self?.hidePickPlaceView()
+        }
+    }
+    
+    private func showPickPlaceView() {
+        UIView.animate(withDuration: 0.3) {
+            self.pickPlaceView.snp.updateConstraints { make in
+                make.bottom.equalToSuperview().inset(20)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func hidePickPlaceView() {
+        UIView.animate(withDuration: 0.3) {
+            self.pickPlaceView.snp.updateConstraints { make in
+                make.bottom.equalTo(self.view.snp.bottom).inset(-300)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .mainColor
+        setupMapView()
+        setupPickPlaceView()
+    }
+    
+    private func setupPickPlaceView() {
+        view.addSubview(pickPlaceView)
+        pickPlaceView.configure(with: viewModel.pickPlaceViewModel)
+        pickPlaceView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalTo(view.snp.bottom).inset(-300)
+            make.height.greaterThanOrEqualToSuperview().dividedBy(3.5)
+        }
     }
     
     private func setupMapView() {
@@ -74,9 +109,6 @@ class WorldMapViewController: UIViewController {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        mapView.setCameraZoomRange(Constants.Map.maximumZoomRange, animated: false)
-        mapView.centerToLocation(Constants.Map.initialLocation)
-        mapView.showsUserLocation = true
     }
     
     private func setupSearchController() {

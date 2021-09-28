@@ -23,7 +23,7 @@ extension UIView {
 
 private extension Constants {
     struct Shadow {
-        static let defaultColor = UIColor.lightGray.cgColor
+        static let defaultColor = UIColor.shadowColor.cgColor
         static let defaultOpacity = Float(0.4)
         static let defaultOffset = CGFloat(7.0)
         static let defaultRadius = CGFloat(3)

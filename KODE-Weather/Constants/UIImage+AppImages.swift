@@ -8,5 +8,5 @@
 import UIKit
 
 extension UIImage {
-    static let cancel = UIImage(named: "CancelButton")
+    static let cancel = UIImage(named: "CancelButton")?.withTintColor(UIColor.accentColor, renderingMode: .alwaysTemplate)
 }

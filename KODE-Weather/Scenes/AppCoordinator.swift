@@ -49,8 +49,8 @@ final class AppCoordinator: Coordinator {
     
     private func setupRootNavigationController() {
         rootNavigationController.navigationBar.isTranslucent = false
-        rootNavigationController.navigationBar.barTintColor = .white
-        rootNavigationController.navigationBar.backgroundColor = .white
+        rootNavigationController.navigationBar.barTintColor = .mainColor
+        rootNavigationController.navigationBar.backgroundColor = .mainColor
         rootNavigationController.navigationBar.addShadow()
     }
     
