@@ -59,4 +59,8 @@ final class APIClient {
         perform(weatherInfoRoute, completion: completion)
     }
     
+    func generateIconLink(iconName: String) -> String {
+        return Constants.API.baseURL + "img/wn/\(iconName)@2x.png"
+    }
+    
 }
