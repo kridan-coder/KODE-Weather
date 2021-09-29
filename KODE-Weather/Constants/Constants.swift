@@ -16,5 +16,8 @@ struct Constants {
         static let defaultRadius = CLLocationDistance(5000)
         static let maximumZoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 2000000)
     }
+    struct API {
+        static let baseURL = "https://api.openweathermap.org/"
+    }
     
 }

@@ -22,3 +22,6 @@
 "NoInternetErrorDescription" = "Try refreshing the screen when communication is restored.";
 "DefaultErrorDescription" = "The problem is on our side, we are already looking into it. Please try refreshing the screen later.";
 "NoSuchPlaceErrorDescription" = "Could not find info about this place. Please try again.";
+
+"DummyPlaceName" = "City";
+"DummyPlaceCoordinates" = "45°16'44.7\"N 9°43'33.2\"E";
