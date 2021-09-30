@@ -12,19 +12,24 @@ class WeatherForecastCoordinator: Coordinator {
     typealias Dependencies = HasAPIClientProvider
     
     // MARK: - Properties
+    weak var delegate: WorldMapCoordinator?
+    
     var childCoordinators: [Coordinator]
     
     var rootNavigationController: UINavigationController
+    
+    var placeName: String
     
     private let dependencies: Dependencies
     
     // MARK: - IBOutlets (всегда приватные)
     
     // MARK: - Init
-    init(dependencies: Dependencies, navigationController: UINavigationController) {
+    init(placeName: String, dependencies: Dependencies, navigationController: UINavigationController) {
         self.dependencies = dependencies
         self.childCoordinators = []
         self.rootNavigationController = navigationController
+        self.placeName = placeName
     }
     
     // MARK: - Lifecycle
@@ -33,8 +38,10 @@ class WeatherForecastCoordinator: Coordinator {
         weatherDetailsViewModel.delegate = self
         
         let weatherDetailsViewController = WeatherDetailsViewController(viewModel: weatherDetailsViewModel)
-        weatherDetailsViewController.title = R.string.localizable.globalWeather()
+        weatherDetailsViewController.title = placeName
         
+        rootNavigationController.navigationBar.prefersLargeTitles = true
+        rootNavigationController.navigationBar.hideShadow()
         rootNavigationController.pushViewController(weatherDetailsViewController, animated: true)
     }
     // MARK: - Public Methods
@@ -43,4 +50,9 @@ class WeatherForecastCoordinator: Coordinator {
 }
 
 // MARK: - WeatherDetailsViewModelDelegate
-extension WeatherForecastCoordinator: WeatherDetailsViewModelDelegate {}
+extension WeatherForecastCoordinator: WeatherDetailsViewModelDelegate {
+    func viewWillDisappear() {
+        rootNavigationController.navigationBar.prefersLargeTitles = false
+        rootNavigationController.navigationBar.showShadow()
+    }
+}

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WeatherDetailsViewModelDelegate: AnyObject {
-    // TODO: setup delegate logic
+    func viewWillDisappear()
 }
 
 class WeatherDetailsViewModel {
@@ -23,6 +23,11 @@ class WeatherDetailsViewModel {
     // MARK: - Init
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
+    }
+    
+    // MARK: - Public Methods
+    func viewWillDisappear() {
+        delegate?.viewWillDisappear()
     }
     
 }

@@ -17,6 +17,9 @@ class WorldMapViewController: UIViewController {
     private let mapView: MKMapView
     private let pickPlaceView: PickPlaceView
     
+    private let activityIndicator: UIActivityIndicatorView
+    private let foregroundView: UIView
+    
     private let searchController: UISearchController
     
     private var pickViewIsShown = false
@@ -30,6 +33,15 @@ class WorldMapViewController: UIViewController {
         pickPlaceView = PickPlaceView()
         searchController = UISearchController()
         
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        foregroundView = {
+            let view = UIView()
+            view.backgroundColor = .darkGray
+            view.layer.opacity = 0.4
+            view.isHidden = true
+            return view
+        }()
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -41,6 +53,7 @@ class WorldMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backButtonTitle = R.string.localizable.map()
         setupView()
         setupSearchController()
         setupGestureRecognizerForMap()
@@ -51,7 +64,8 @@ class WorldMapViewController: UIViewController {
     
     // MARK: - Actions
     
-    @IBAction private func getCoordinatePressOnMap(sender: UITapGestureRecognizer) {
+    @IBAction private func tappedOnMap(sender: UITapGestureRecognizer) {
+        startLoading()
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
         viewModel.tappedAtLocation(locationCoordinate.clLocation)
@@ -64,10 +78,36 @@ class WorldMapViewController: UIViewController {
     private func bindToViewModel() {
         viewModel.didFindPlace = { [weak self] in
             self?.showPickPlaceView()
+            self?.stopLoading()
+            
         }
         viewModel.needsPickPlaceViewHidden = { [weak self] in
             self?.hidePickPlaceView()
         }
+    }
+    
+    private func blockUserInteraction() {
+        view.isUserInteractionEnabled = false
+        navigationController?.navigationBar.isUserInteractionEnabled = false
+    }
+    
+    private func allowUserInteraction() {
+        view.isUserInteractionEnabled = true
+        navigationController?.navigationBar.isUserInteractionEnabled = true
+    }
+    
+    private func startLoading() {
+        blockUserInteraction()
+        activityIndicator.startAnimating()
+        navigationController?.navigationBar.layer.opacity = 0.8
+        foregroundView.isHidden = false
+    }
+    
+    private func stopLoading() {
+        allowUserInteraction()
+        activityIndicator.stopAnimating()
+        foregroundView.isHidden = true
+        navigationController?.navigationBar.layer.opacity = 1
     }
     
     private func showPickPlaceView() {
@@ -92,6 +132,22 @@ class WorldMapViewController: UIViewController {
         view.backgroundColor = .mainColor
         setupMapView()
         setupPickPlaceView()
+        setupActivityIndicatorView()
+        setupForegroundView()
+    }
+    
+    private func setupActivityIndicatorView() {
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    private func setupForegroundView() {
+        view.addSubview(foregroundView)
+        foregroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func setupPickPlaceView() {
@@ -117,7 +173,7 @@ class WorldMapViewController: UIViewController {
     }
     
     private func setupGestureRecognizerForMap() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(getCoordinatePressOnMap(sender:)))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
         gestureRecognizer.numberOfTapsRequired = 1
         mapView.addGestureRecognizer(gestureRecognizer)
     }

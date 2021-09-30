@@ -13,11 +13,18 @@ extension UIView {
                    offset: CGFloat = Constants.Shadow.defaultOffset,
                    radius: CGFloat = Constants.Shadow.defaultRadius) {
         
-        self.layer.masksToBounds = false
         self.layer.shadowColor = color
         self.layer.shadowOpacity = opacity
         self.layer.shadowOffset = CGSize(width: 0, height: offset)
         self.layer.shadowRadius = radius
+    }
+    
+    func hideShadow() {
+        self.layer.masksToBounds = true
+    }
+    
+    func showShadow() {
+        self.layer.masksToBounds = false
     }
 }
 

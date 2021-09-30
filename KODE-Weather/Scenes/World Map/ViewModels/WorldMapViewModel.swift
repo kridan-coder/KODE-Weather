@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 
 protocol WorldMapViewModelDelegate: AnyObject {
-    // TODO: setup delegate logic
+    func worldMapViewModel(_ worldMapViewModel: WorldMapViewModel, didRequestShowWeatherFor placeName: String)
 }
 
 class WorldMapViewModel {
@@ -62,7 +62,7 @@ class WorldMapViewModel {
             self.needsPickPlaceViewHidden?()
         }
         pickPlaceViewModel.didPressShowWeatherButton = {
-            // TODO: - start Weather Forecast Scene
+            self.delegate?.worldMapViewModel(self, didRequestShowWeatherFor: self.pickPlaceViewModel.data.placeName)
         }
     }
 }

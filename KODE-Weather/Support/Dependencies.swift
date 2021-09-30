@@ -14,3 +14,7 @@ struct AppDependencies: HasAPIClientProvider {
 protocol HasAPIClientProvider {
     var apiClient: APIClient { get }
 }
+
+protocol HasAPIClientProviderForWeatherForecast {
+    
+}
