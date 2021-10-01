@@ -15,11 +15,11 @@ final class WeatherDetailsView: UIView {
     private let circleView: UIView
     private let stackView: UIStackView
     
+    private var stackViewSubviews: [UIView]
+    
     private let equasionHelper: EquasionHelper
     
     private let button: UIButton
-    
-    private var testViews: [UIView]
     
     // MARK: - Init
     init() {
@@ -28,23 +28,14 @@ final class WeatherDetailsView: UIView {
         bigImageView = UIImageView()
         stackView = UIStackView()
         
-        equasionHelper = EquasionHelper()
+        stackViewSubviews = [DegreesView(), IconView()]
         
-        testViews = []
-
+        equasionHelper = EquasionHelper()
         
         button = UIButton(type: .system)
         button.setTitle("Hello!", for: .normal)
-        
+
         super.init(frame: CGRect.zero)
-        
-        for iterator in 0..<50 {
-            var view = UIView()
-            view.frame = CGRect(x: 0, y: (iterator + 1)*30, width: 1000, height: 2)
-            view.backgroundColor = .red
-            testViews.append(view)
-            self.addSubview(view)
-        }
         
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
@@ -62,6 +53,7 @@ final class WeatherDetailsView: UIView {
         createConstraints()
         self.layoutIfNeeded()
         initializeUI()
+        fillStackView(with: stackViewSubviews)
     }
     
     // MARK: - Private Methods
@@ -79,15 +71,23 @@ final class WeatherDetailsView: UIView {
         circleView.addSubview(bigImageView)
         addSubview(stackView)
         
+        
         addSubview(button)
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
+        
         createCircleViewConstraints()
         createBigImageViewConstraints()
         createStackViewConstraints()
         createActivityIndicatorConstraints()
+    }
+    
+    private func fillStackView(with subviews: [UIView]) {
+        for view in subviews {
+            stackView.addSubview(view)
+        }
     }
     
     private func setupCircleViewUI() {
@@ -102,6 +102,7 @@ final class WeatherDetailsView: UIView {
     
     private func setupStackViewUI() {
         stackView.alignment = .leading
+        stackView.backgroundColor = .green
     }
     
     private func setupActivityIndicatorUI() {
@@ -128,7 +129,13 @@ final class WeatherDetailsView: UIView {
         }
     }
     
-    private func createStackViewConstraints() {}
+    private func createStackViewConstraints() {
+        stackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().inset(-500)
+            make.width.equalToSuperview()
+        }
+    }
     
     private func animateViews() {
         UIView.animate(withDuration: 0.3, animations: {
@@ -138,19 +145,16 @@ final class WeatherDetailsView: UIView {
                         }
                         self.layoutIfNeeded()
             
-        }) { finished in
-
-//            print(result[0].x, result[0].y)
-            print(self.frame.width)
-//            print(self.frame.height)
-            
-            for element in self.testViews {
-                let result = self.equasionHelper.distanceToEdgeOfCircle(axisY: Double(element.frame.midY),
-                                                  circle: Circumference(radius: Double(self.circleView.layer.cornerRadius),
-                                                                                             center: CGPoint(x: self.circleView.frame.midX, y: self.circleView.frame.midY)))
-                print(result)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.stackView.snp.updateConstraints { make in
+                    make.leading.equalToSuperview()
+                }
+                self.layoutIfNeeded()
             }
-        }
+            
+
+        })
     }
     
 }

@@ -34,6 +34,8 @@
 		44921B2F2701DDFB0028E2BE /* UIImage+AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */; };
 		44942BC22706F20100323936 /* EquasionHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44942BC12706F20100323936 /* EquasionHepler.swift */; };
 		44942BC62706F2F400323936 /* Circumference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44942BC52706F2F400323936 /* Circumference.swift */; };
+		44942BC827070D5F00323936 /* DegreesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44942BC727070D5F00323936 /* DegreesView.swift */; };
+		44942BCA2707110E00323936 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44942BC92707110E00323936 /* IconView.swift */; };
 		4495E50827059A98006BB26F /* WeatherDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4495E50727059A98006BB26F /* WeatherDetailsView.swift */; };
 		4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6026FC73FC0009976A /* VulnerableData.swift */; };
 		4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6226FC747B0009976A /* AppCoordinator.swift */; };
@@ -76,6 +78,8 @@
 		44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AppImages.swift"; sourceTree = "<group>"; };
 		44942BC12706F20100323936 /* EquasionHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquasionHepler.swift; sourceTree = "<group>"; };
 		44942BC52706F2F400323936 /* Circumference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circumference.swift; sourceTree = "<group>"; };
+		44942BC727070D5F00323936 /* DegreesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreesView.swift; sourceTree = "<group>"; };
+		44942BC92707110E00323936 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		4495E50727059A98006BB26F /* WeatherDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsView.swift; sourceTree = "<group>"; };
 		4496CD6026FC73FC0009976A /* VulnerableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VulnerableData.swift; sourceTree = "<group>"; };
 		4496CD6226FC747B0009976A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				4495E50727059A98006BB26F /* WeatherDetailsView.swift */,
+				44942BC727070D5F00323936 /* DegreesView.swift */,
+				44942BC92707110E00323936 /* IconView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 				44921B272701BDE10028E2BE /* UIColor+AppColors.swift in Sources */,
 				446C7C9626FDBD5F00AD0B67 /* PickPlaceView.swift in Sources */,
 				4496CD7826FCA70C0009976A /* R.generated.swift in Sources */,
+				44942BCA2707110E00323936 /* IconView.swift in Sources */,
 				4496CD6B26FC912D0009976A /* Coordinator.swift in Sources */,
 				446C7C9826FDC43500AD0B67 /* MapView.swift in Sources */,
 				446C7C9226FDB23B00AD0B67 /* WorldMapViewController.swift in Sources */,
@@ -510,6 +517,7 @@
 				448D9A8D2703243F00403780 /* Errors.swift in Sources */,
 				448D9A872702F1C700403780 /* WeatherDetailsViewController.swift in Sources */,
 				4496CD7C26FCA9100009976A /* Dependencies.swift in Sources */,
+				44942BC827070D5F00323936 /* DegreesView.swift in Sources */,
 				448818EA26F8B04300BE32C7 /* SceneDelegate.swift in Sources */,
 				44921B232701BC080028E2BE /* UIViewAddons.swift in Sources */,
 				44921B2F2701DDFB0028E2BE /* UIImage+AppImages.swift in Sources */,
