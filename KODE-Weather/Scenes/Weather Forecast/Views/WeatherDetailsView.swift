@@ -12,24 +12,41 @@ final class WeatherDetailsView: UIView {
     private let activityIndicator: UIActivityIndicatorView
     
     private let bigImageView: UIImageView
+    private let circleView: UIView
     private let stackView: UIStackView
     
+    private let equasionHelper: EquasionHelper
+    
     private let button: UIButton
+    
+    private var testViews: [UIView]
     
     // MARK: - Init
     init() {
         activityIndicator = UIActivityIndicatorView(style: .large)
+        circleView = UIView()
         bigImageView = UIImageView()
         stackView = UIStackView()
+        
+        equasionHelper = EquasionHelper()
+        
+        testViews = []
+
         
         button = UIButton(type: .system)
         button.setTitle("Hello!", for: .normal)
         
         super.init(frame: CGRect.zero)
         
+        for iterator in 0..<50 {
+            var view = UIView()
+            view.frame = CGRect(x: 0, y: (iterator + 1)*30, width: 1000, height: 2)
+            view.backgroundColor = .red
+            testViews.append(view)
+            self.addSubview(view)
+        }
+        
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        initializeUI()
-        createConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -40,17 +57,26 @@ final class WeatherDetailsView: UIView {
         animateViews()
     }
     
+    // MARK: - Public Methods
+    func setup() {
+        createConstraints()
+        self.layoutIfNeeded()
+        initializeUI()
+    }
+    
     // MARK: - Private Methods
     private func initializeUI() {
         backgroundColor = .mainColor
         setupActivityIndicatorUI()
         setupStackViewUI()
+        setupCircleViewUI()
         setupBigImageViewUI()
     }
     
     private func createConstraints() {
         addSubview(activityIndicator)
-        addSubview(bigImageView)
+        addSubview(circleView)
+        circleView.addSubview(bigImageView)
         addSubview(stackView)
         
         addSubview(button)
@@ -58,14 +84,20 @@ final class WeatherDetailsView: UIView {
             make.edges.equalToSuperview()
         }
         
+        createCircleViewConstraints()
         createBigImageViewConstraints()
         createStackViewConstraints()
         createActivityIndicatorConstraints()
     }
     
+    private func setupCircleViewUI() {
+        circleView.layer.cornerRadius = circleView.frame.width / 2
+        circleView.clipsToBounds = true
+    }
+    
     private func setupBigImageViewUI() {
-        bigImageView.layer.cornerRadius = bigImageView.frame.height / 2
-        bigImageView.image = UIImage(named: "Rain")
+        bigImageView.contentMode = .scaleAspectFill
+        bigImageView.image = UIImage(named: "ScatteredClouds")
     }
     
     private func setupStackViewUI() {
@@ -82,22 +114,42 @@ final class WeatherDetailsView: UIView {
         }
     }
     
+    private func createCircleViewConstraints() {
+        circleView.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().inset(500)
+            make.size.equalTo(self.snp.height).multipliedBy(1.38)
+        }
+    }
+    
     private func createBigImageViewConstraints() {
         bigImageView.snp.makeConstraints { make in
-            make.bottom.right.equalToSuperview().inset(-500)
-            make.width.equalToSuperview().multipliedBy(0.64)
-            make.height.equalToSuperview()
+            make.left.top.bottom.equalToSuperview()
+            make.width.equalTo(self).multipliedBy(0.64)
         }
     }
     
     private func createStackViewConstraints() {}
     
     private func animateViews() {
-        UIView.animate(withDuration: 0.3) {
-            self.bigImageView.snp.updateConstraints { make in
-                make.bottom.right.equalToSuperview()
+        UIView.animate(withDuration: 0.3, animations: {
+                        self.circleView.snp.updateConstraints { make in
+                            make.left.equalToSuperview().inset(self.frame.width * 0.36)
+                            make.top.equalToSuperview()
+                        }
+                        self.layoutIfNeeded()
+            
+        }) { finished in
+
+//            print(result[0].x, result[0].y)
+            print(self.frame.width)
+//            print(self.frame.height)
+            
+            for element in self.testViews {
+                let result = self.equasionHelper.distanceToEdgeOfCircle(axisY: Double(element.frame.midY),
+                                                  circle: Circumference(radius: Double(self.circleView.layer.cornerRadius),
+                                                                                             center: CGPoint(x: self.circleView.frame.midX, y: self.circleView.frame.midY)))
+                print(result)
             }
-            self.layoutIfNeeded()
         }
     }
     

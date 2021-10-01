@@ -28,8 +28,12 @@ final class WeatherDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         bindToViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,6 +49,8 @@ final class WeatherDetailsViewController: UIViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        view.layoutIfNeeded()
+        contentView.setup()
     }
     
 }

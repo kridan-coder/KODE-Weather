@@ -32,6 +32,8 @@
 		44921B2B2701DA3B0028E2BE /* PickPlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2A2701DA3B0028E2BE /* PickPlaceViewModel.swift */; };
 		44921B2D2701DCA20028E2BE /* UIFont+AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2C2701DCA20028E2BE /* UIFont+AppFonts.swift */; };
 		44921B2F2701DDFB0028E2BE /* UIImage+AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */; };
+		44942BC22706F20100323936 /* EquasionHepler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44942BC12706F20100323936 /* EquasionHepler.swift */; };
+		44942BC62706F2F400323936 /* Circumference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44942BC52706F2F400323936 /* Circumference.swift */; };
 		4495E50827059A98006BB26F /* WeatherDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4495E50727059A98006BB26F /* WeatherDetailsView.swift */; };
 		4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6026FC73FC0009976A /* VulnerableData.swift */; };
 		4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4496CD6226FC747B0009976A /* AppCoordinator.swift */; };
@@ -72,6 +74,8 @@
 		44921B2A2701DA3B0028E2BE /* PickPlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPlaceViewModel.swift; sourceTree = "<group>"; };
 		44921B2C2701DCA20028E2BE /* UIFont+AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFonts.swift"; sourceTree = "<group>"; };
 		44921B2E2701DDFB0028E2BE /* UIImage+AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AppImages.swift"; sourceTree = "<group>"; };
+		44942BC12706F20100323936 /* EquasionHepler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquasionHepler.swift; sourceTree = "<group>"; };
+		44942BC52706F2F400323936 /* Circumference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circumference.swift; sourceTree = "<group>"; };
 		4495E50727059A98006BB26F /* WeatherDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailsView.swift; sourceTree = "<group>"; };
 		4496CD6026FC73FC0009976A /* VulnerableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VulnerableData.swift; sourceTree = "<group>"; };
 		4496CD6226FC747B0009976A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -208,6 +212,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		44942BC32706F2D700323936 /* EquasionHelper */ = {
+			isa = PBXGroup;
+			children = (
+				44942BC42706F2E100323936 /* Models */,
+				44942BC12706F20100323936 /* EquasionHepler.swift */,
+			);
+			path = EquasionHelper;
+			sourceTree = "<group>";
+		};
+		44942BC42706F2E100323936 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				44942BC52706F2F400323936 /* Circumference.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		4496CD6426FC77120009976A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +243,7 @@
 		4496CD6526FC771A0009976A /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				44942BC32706F2D700323936 /* EquasionHelper */,
 				448D9A8C2703243F00403780 /* Errors.swift */,
 				448D9A8E27032A9F00403780 /* Converter.swift */,
 				4496CD6A26FC912D0009976A /* Coordinator.swift */,
@@ -468,6 +490,7 @@
 				448A083A27047B6600AE7EE8 /* Main.swift in Sources */,
 				4496CD7026FCA1560009976A /* APIClient.swift in Sources */,
 				4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */,
+				44942BC62706F2F400323936 /* Circumference.swift in Sources */,
 				4496CD7A26FCA8740009976A /* WeatherForecastCoordinator.swift in Sources */,
 				44921B272701BDE10028E2BE /* UIColor+AppColors.swift in Sources */,
 				446C7C9626FDBD5F00AD0B67 /* PickPlaceView.swift in Sources */,
@@ -478,6 +501,7 @@
 				448818E826F8B04300BE32C7 /* AppDelegate.swift in Sources */,
 				446C7C9426FDB24700AD0B67 /* WorldMapViewModel.swift in Sources */,
 				44921B292701CCD70028E2BE /* MKMapViewAddons.swift in Sources */,
+				44942BC22706F20100323936 /* EquasionHepler.swift in Sources */,
 				446C7C9A26FDC50300AD0B67 /* MapViewModel.swift in Sources */,
 				44921B2D2701DCA20028E2BE /* UIFont+AppFonts.swift in Sources */,
 				448A083827047ACF00AE7EE8 /* Weather.swift in Sources */,
