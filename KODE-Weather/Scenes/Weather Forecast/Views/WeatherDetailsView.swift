@@ -28,7 +28,7 @@ final class WeatherDetailsView: UIView {
         bigImageView = UIImageView()
         stackView = UIStackView()
         
-        stackViewSubviews = [DegreesView(), IconView()]
+        stackViewSubviews = [DegreesView(), IconView(), KeyValueView(), KeyValueView(), KeyValueView()]
         
         equasionHelper = EquasionHelper()
         
@@ -53,7 +53,6 @@ final class WeatherDetailsView: UIView {
         createConstraints()
         self.layoutIfNeeded()
         initializeUI()
-        fillStackView(with: stackViewSubviews)
     }
     
     // MARK: - Private Methods
@@ -71,12 +70,10 @@ final class WeatherDetailsView: UIView {
         circleView.addSubview(bigImageView)
         addSubview(stackView)
         
-        
         addSubview(button)
         button.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         
         createCircleViewConstraints()
         createBigImageViewConstraints()
@@ -86,8 +83,46 @@ final class WeatherDetailsView: UIView {
     
     private func fillStackView(with subviews: [UIView]) {
         for view in subviews {
-            stackView.addSubview(view)
+            stackView.addArrangedSubview(view)
         }
+        self.layoutIfNeeded()
+        for view in subviews {
+            stackView.addArrangedSubview(view)
+            let maxWidthTop = equasionHelper.distanceToEdgeOfCircle(axisY: view.frame.minY + Constants.StackView.verticalInset,
+                                                                    circle: Circumference(radius: circleView.frame.width / 2,
+                                                                                          center: circleView.center)) - Double(Constants.StackView.horizontalInset)*2
+            
+            let maxWidthMiddle = equasionHelper.distanceToEdgeOfCircle(axisY: view.frame.midY + Constants.StackView.verticalInset,
+                                                                       circle: Circumference(radius: circleView.frame.width / 2,
+                                                                                             center: circleView.center)) - Double(Constants.StackView.horizontalInset)*2
+            
+            let maxWidthBottom = equasionHelper.distanceToEdgeOfCircle(axisY: view.frame.maxY + Constants.StackView.verticalInset,
+                                                                       circle: Circumference(radius: circleView.frame.width / 2,
+                                                                                             center: circleView.center)) - Double(Constants.StackView.horizontalInset)*2
+            let finalMaxWidth = min(maxWidthTop, maxWidthBottom, maxWidthMiddle, Double(frame.width - Constants.StackView.horizontalInset*2))
+            
+            print(maxWidthTop)
+            
+            print(maxWidthBottom)
+            
+            print(frame.width)
+            print(frame.height)
+            
+            print(view.frame.width)
+            
+            print(view.frame.height)
+            
+            print(view.frame.minY)
+            
+            print(view.frame.maxY)
+
+            
+            view.snp.makeConstraints { make in
+                make.width.lessThanOrEqualTo(finalMaxWidth)
+            }
+            //view.sizeToFit()
+        }
+        
     }
     
     private func setupCircleViewUI() {
@@ -101,8 +136,10 @@ final class WeatherDetailsView: UIView {
     }
     
     private func setupStackViewUI() {
+        stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.backgroundColor = .green
+        stackView.distribution = .fillProportionally
+        stackView.spacing = Constants.StackView.verticalInset
     }
     
     private func setupActivityIndicatorUI() {
@@ -131,8 +168,9 @@ final class WeatherDetailsView: UIView {
     
     private func createStackViewConstraints() {
         stackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().inset(-500)
+            make.leading.equalToSuperview().inset(-1000)
+            make.top.equalToSuperview().inset(Constants.StackView.verticalInset)
+            make.bottom.lessThanOrEqualToSuperview().inset(Constants.StackView.horizontalInset)
             make.width.equalToSuperview()
         }
     }
@@ -146,15 +184,22 @@ final class WeatherDetailsView: UIView {
                         self.layoutIfNeeded()
             
         }, completion: { _ in
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.45) {
+                self.fillStackView(with: self.stackViewSubviews)
                 self.stackView.snp.updateConstraints { make in
-                    make.leading.equalToSuperview()
+                    make.leading.equalToSuperview().inset(Constants.StackView.horizontalInset)
                 }
                 self.layoutIfNeeded()
             }
             
-
         })
     }
     
+}
+
+private extension Constants {
+    struct StackView {
+        static let horizontalInset = CGFloat(15)
+        static let verticalInset = CGFloat(20)
+    }
 }

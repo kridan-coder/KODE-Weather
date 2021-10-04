@@ -18,13 +18,16 @@ final class IconView: UIView {
         iconView = UIImageView()
 
         super.init(frame: CGRect.zero)
-        
+        backgroundColor = .yellow
         initializeUI()
         createConstraints()
         
-        iconLabel.text = "Scattered Clouds"
+
         iconView.kf.setImage(with: URL(string: "http://openweathermap.org/img/wn/10d@2x.png"))
-        backgroundColor = .blue
+        iconLabel.text = "Scattered Clouds"
+        
+        
+
     }
     
     required init?(coder: NSCoder) {
@@ -33,8 +36,9 @@ final class IconView: UIView {
     
     // MARK: - Private Methods
     private func initializeUI() {
-        iconLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        iconLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         iconLabel.numberOfLines = 2
+        iconLabel.textAlignment = .center
         
         iconView.kf.indicatorType = .activity
     }
@@ -42,17 +46,20 @@ final class IconView: UIView {
     private func createConstraints() {
         addSubview(iconLabel)
         addSubview(iconView)
-        
+        //self.translatesAutoresizingMaskIntoConstraints = false
         iconLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
+            make.top.equalTo(iconView.snp.bottom)
+            make.bottom.equalToSuperview()
+            
+        }
+        iconView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
+            make.size.equalTo(50)
         }
         
-        iconView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
-        }
+
+        self.sizeToFit()
     }
 }

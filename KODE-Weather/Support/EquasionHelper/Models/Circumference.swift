@@ -9,6 +9,6 @@ import Foundation
 import CoreGraphics
 
 struct Circumference {
-    let radius: Double
+    let radius: CGFloat
     let center: CGPoint
 }

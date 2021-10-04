@@ -13,6 +13,8 @@
 		446C7C9626FDBD5F00AD0B67 /* PickPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9526FDBD5F00AD0B67 /* PickPlaceView.swift */; };
 		446C7C9826FDC43500AD0B67 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9726FDC43500AD0B67 /* MapView.swift */; };
 		446C7C9A26FDC50300AD0B67 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C7C9926FDC50300AD0B67 /* MapViewModel.swift */; };
+		447EDD37270B14D800A04B2A /* StringAddons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447EDD36270B14D800A04B2A /* StringAddons.swift */; };
+		447EDD39270B2EEE00A04B2A /* KeyValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447EDD38270B2EEE00A04B2A /* KeyValueView.swift */; };
 		448818E826F8B04300BE32C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448818E726F8B04300BE32C7 /* AppDelegate.swift */; };
 		448818EA26F8B04300BE32C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448818E926F8B04300BE32C7 /* SceneDelegate.swift */; };
 		448818F126F8B04600BE32C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448818F026F8B04600BE32C7 /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		446C7C9526FDBD5F00AD0B67 /* PickPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPlaceView.swift; sourceTree = "<group>"; };
 		446C7C9726FDC43500AD0B67 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		446C7C9926FDC50300AD0B67 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		447EDD36270B14D800A04B2A /* StringAddons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringAddons.swift; sourceTree = "<group>"; };
+		447EDD38270B2EEE00A04B2A /* KeyValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueView.swift; sourceTree = "<group>"; };
 		448818E426F8B04300BE32C7 /* KODE-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KODE-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		448818E726F8B04300BE32C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		448818E926F8B04300BE32C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				4495E50727059A98006BB26F /* WeatherDetailsView.swift */,
 				44942BC727070D5F00323936 /* DegreesView.swift */,
 				44942BC92707110E00323936 /* IconView.swift */,
+				447EDD38270B2EEE00A04B2A /* KeyValueView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 		4496CD6526FC771A0009976A /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				447EDD36270B14D800A04B2A /* StringAddons.swift */,
 				44942BC32706F2D700323936 /* EquasionHelper */,
 				448D9A8C2703243F00403780 /* Errors.swift */,
 				448D9A8E27032A9F00403780 /* Converter.swift */,
@@ -487,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4496CD6126FC73FC0009976A /* VulnerableData.swift in Sources */,
+				447EDD37270B14D800A04B2A /* StringAddons.swift in Sources */,
 				448A084027047BFE00AE7EE8 /* WeatherResponse.swift in Sources */,
 				44921B252701BD610028E2BE /* Constants.swift in Sources */,
 				448D9A8B2703053800403780 /* PickPlaceData.swift in Sources */,
@@ -495,6 +502,7 @@
 				44921B2B2701DA3B0028E2BE /* PickPlaceViewModel.swift in Sources */,
 				448A083A27047B6600AE7EE8 /* Main.swift in Sources */,
 				4496CD7026FCA1560009976A /* APIClient.swift in Sources */,
+				447EDD39270B2EEE00A04B2A /* KeyValueView.swift in Sources */,
 				4496CD6326FC747B0009976A /* AppCoordinator.swift in Sources */,
 				44942BC62706F2F400323936 /* Circumference.swift in Sources */,
 				4496CD7A26FCA8740009976A /* WeatherForecastCoordinator.swift in Sources */,
