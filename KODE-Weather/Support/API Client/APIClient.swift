@@ -53,7 +53,7 @@ final class APIClient {
         }
     
     func getWeatherInfoViaCityName(_ cityName: String, completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
-        let weatherInfoRoute = APIRoutable(path: "data/2.5/weather?q=\(cityName)&appid=\(APIKey.key)",
+        let weatherInfoRoute = APIRoutable(path: "data/2.5/weather?q=\(cityName)&units=metric&appid=\(APIKey.key)",
                                            method: .get,
                                            encoding: URLEncoding.default)
         perform(weatherInfoRoute, completion: completion)

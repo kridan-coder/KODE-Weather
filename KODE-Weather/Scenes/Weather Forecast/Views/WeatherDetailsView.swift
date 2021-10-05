@@ -99,8 +99,8 @@ final class WeatherDetailsView: UIView {
             let maxWidthBottom = equasionHelper.distanceToEdgeOfCircle(axisY: view.frame.maxY + Constants.StackView.verticalInset,
                                                                        circle: Circumference(radius: circleView.frame.width / 2,
                                                                                              center: circleView.center)) - Double(Constants.StackView.horizontalInset)*2
-            let finalMaxWidth = min(maxWidthTop, maxWidthBottom, maxWidthMiddle, Double(frame.width - Constants.StackView.horizontalInset*2))
-            
+            let finalMaxWidth = max(maxWidthTop, maxWidthBottom, maxWidthMiddle)
+             //   , Double(frame.width - Constants.StackView.horizontalInset*2)
             print(maxWidthTop)
             
             print(maxWidthBottom)
@@ -138,7 +138,7 @@ final class WeatherDetailsView: UIView {
     private func setupStackViewUI() {
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .equalSpacing
         stackView.spacing = Constants.StackView.verticalInset
     }
     
@@ -170,7 +170,7 @@ final class WeatherDetailsView: UIView {
         stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(-1000)
             make.top.equalToSuperview().inset(Constants.StackView.verticalInset)
-            make.bottom.lessThanOrEqualToSuperview().inset(Constants.StackView.horizontalInset)
+            make.bottom.equalToSuperview().inset(Constants.StackView.horizontalInset)
             make.width.equalToSuperview()
         }
     }
@@ -200,6 +200,6 @@ final class WeatherDetailsView: UIView {
 private extension Constants {
     struct StackView {
         static let horizontalInset = CGFloat(15)
-        static let verticalInset = CGFloat(20)
+        static let verticalInset = CGFloat(10)
     }
 }

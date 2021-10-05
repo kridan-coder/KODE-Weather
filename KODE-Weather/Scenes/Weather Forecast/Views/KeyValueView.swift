@@ -21,13 +21,24 @@ final class KeyValueView: UIView {
         initializeUI()
         createConstraints()
         
-        keyLabel.text = "HUMIDITY"
-        valueLabel.text = "58%"
-        backgroundColor = .green
+        keyLabel.text = "PRESSURE"
+        valueLabel.text = "763.53 mm Hg"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func maxWidthForKeyLabel(width: Double) {
+        keyLabel.snp.updateConstraints { make in
+            make.width.equalTo(width)
+        }
+    }
+    
+    func maxWidthForValueLabel(width: Double) {
+        valueLabel.snp.updateConstraints { make in
+            make.width.equalTo(width)
+        }
     }
     
     // MARK: - Private Methods
@@ -47,7 +58,7 @@ final class KeyValueView: UIView {
         keyLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
-            make.bottom.equalTo(valueLabel.snp.top).inset(-10)
+            make.bottom.equalTo(valueLabel.snp.top).inset(-5)
         }
         
         valueLabel.snp.makeConstraints { make in

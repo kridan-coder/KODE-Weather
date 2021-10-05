@@ -29,7 +29,7 @@ final class DegreesView: UIView {
     // MARK: - Private Methods
     private func initializeUI() {
         
-        degreesLabelText.font = UIFont.systemFont(ofSize: 100, weight: .bold)
+        degreesLabelText.font = UIFont.systemFont(ofSize: 90, weight: .bold)
         degreesLabelText.numberOfLines = 1
         
         degreesLabelText.textColor = UIColor(red: 0.21, green: 0.21, blue: 0.21, alpha: 1)

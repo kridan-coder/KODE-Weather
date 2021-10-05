@@ -9,13 +9,13 @@ import Foundation
 
 class PickPlaceViewModel {
     // MARK: - Properties
-    var dataUpdated: (() -> Void)?
-    
     var data: PickPlaceData {
         didSet {
-            dataUpdated?()
+            didUpdateData?()
         }
     }
+    
+    var didUpdateData: (() -> Void)?
     
     var didPressCancelButton: (() -> Void)?
     var didPressShowWeatherButton: (() -> Void)?

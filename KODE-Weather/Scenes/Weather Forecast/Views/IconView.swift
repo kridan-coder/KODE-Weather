@@ -18,13 +18,12 @@ final class IconView: UIView {
         iconView = UIImageView()
 
         super.init(frame: CGRect.zero)
-        backgroundColor = .yellow
         initializeUI()
         createConstraints()
         
-
+        iconView.contentMode = .scaleToFill
         iconView.kf.setImage(with: URL(string: "http://openweathermap.org/img/wn/10d@2x.png"))
-        iconLabel.text = "Scattered Clouds"
+        iconLabel.text = "Scattered \nClouds"
         
         
 
@@ -40,6 +39,7 @@ final class IconView: UIView {
         iconLabel.numberOfLines = 2
         iconLabel.textAlignment = .center
         
+
         iconView.kf.indicatorType = .activity
     }
     
@@ -56,7 +56,7 @@ final class IconView: UIView {
         iconView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.size.equalTo(50)
+            make.size.equalTo(75)
         }
         
 

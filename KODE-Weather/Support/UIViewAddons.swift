@@ -26,6 +26,13 @@ extension UIView {
     func showShadow() {
         self.layer.masksToBounds = false
     }
+    
+    static var foregroundBlur: UIView {
+        let view = UIView()
+        view.backgroundColor = Constants.Blur.color
+        view.layer.opacity = Constants.Blur.opacity
+        return view
+    }
 }
 
 private extension Constants {
@@ -34,5 +41,10 @@ private extension Constants {
         static let defaultOpacity = Float(0.4)
         static let defaultOffset = CGFloat(7.0)
         static let defaultRadius = CGFloat(3)
+    }
+    
+    struct Blur {
+        static let opacity = Float(0.4)
+        static let color = UIColor.darkGray
     }
 }

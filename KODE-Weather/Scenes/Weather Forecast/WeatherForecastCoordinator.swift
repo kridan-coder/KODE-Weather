@@ -34,7 +34,7 @@ class WeatherForecastCoordinator: Coordinator {
     
     // MARK: - Lifecycle
     func start() {
-        let weatherDetailsViewModel = WeatherDetailsViewModel(dependencies: dependencies)
+        let weatherDetailsViewModel = WeatherDetailsViewModel(dependencies: dependencies, placeName: placeName)
         weatherDetailsViewModel.delegate = self
         
         let weatherDetailsViewController = WeatherDetailsViewController(viewModel: weatherDetailsViewModel)
@@ -51,7 +51,7 @@ class WeatherForecastCoordinator: Coordinator {
 
 // MARK: - WeatherDetailsViewModelDelegate
 extension WeatherForecastCoordinator: WeatherDetailsViewModelDelegate {
-    func viewWillDisappear() {
+    func weatherDetailsViewModel() {
         rootNavigationController.navigationBar.prefersLargeTitles = false
         rootNavigationController.navigationBar.showShadow()
     }

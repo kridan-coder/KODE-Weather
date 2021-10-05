@@ -10,7 +10,6 @@ import MapKit
 
 final class MapView: MKMapView {
     // MARK: - Properties
-    
     private var viewModel: MapViewModel?
     
     // MARK: - Init

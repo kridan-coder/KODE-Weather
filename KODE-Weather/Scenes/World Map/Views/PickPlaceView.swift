@@ -34,8 +34,6 @@ final class PickPlaceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Lifecycle
-    
     // MARK: - Public Methods
     func configure(with viewModel: PickPlaceViewModel) {
         self.viewModel = viewModel
@@ -43,7 +41,7 @@ final class PickPlaceView: UIView {
                   placeName: viewModel.data.placeName,
                   placeCoordinates: viewModel.data.placeCoordinates)
         
-        viewModel.dataUpdated = {
+        viewModel.didUpdateData = {
             self.setupData(showWeatherButtonTitle: viewModel.data.showWeatherButtonTitle,
                            placeName: viewModel.data.placeName,
                            placeCoordinates: viewModel.data.placeCoordinates)
@@ -51,7 +49,6 @@ final class PickPlaceView: UIView {
     }
     
     // MARK: - Actions
-    
     @objc private func cancelButtonPressed() {
         viewModel?.didPressCancelButton?()
     }
@@ -61,7 +58,6 @@ final class PickPlaceView: UIView {
     }
     
     // MARK: - Private Methods
-    
     private func setupData(showWeatherButtonTitle: String, placeName: String, placeCoordinates: String) {
         showWeatherButton.setTitle(showWeatherButtonTitle, for: .normal)
         placeNameLabel.text = placeName
@@ -145,7 +141,7 @@ final class PickPlaceView: UIView {
     private func createPlaceCoordinatesLabelConstraints() {
         placeCoordinatesLabel.snp.makeConstraints { make in
             make.leading.equalTo(placeNameLabel)
-            make.top.equalTo(placeNameLabel.snp.bottom).inset(-5)
+            make.top.equalTo(placeNameLabel.snp.bottom).inset(-Constants.PlaceCoordinatesLabel.inset)
             make.bottom.lessThanOrEqualTo(showWeatherButton.snp.top).inset(-Constants.defaultInset)
             make.trailing.lessThanOrEqualTo(cancelButton.snp.leading).inset(-Constants.defaultInset)
         }
@@ -160,6 +156,7 @@ private extension Constants {
     
     struct PlaceCoordinatesLabel {
         static let linesAmount = 1
+        static let inset = CGFloat(5)
     }
     
     struct PickCityView {

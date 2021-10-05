@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WeatherDetailsViewModelDelegate: AnyObject {
-    func viewWillDisappear()
+    func weatherDetailsViewModel()
 }
 
 class WeatherDetailsViewModel {
@@ -20,14 +20,39 @@ class WeatherDetailsViewModel {
     
     private let dependencies: Dependencies
     
+    private var placeName: String
+    
+    var didStartUpdating: (() -> Void)?
+    var didFinishUpdating: (() -> Void)?
+    var didReceiveError: ((Error) -> Void)?
+    
     // MARK: - Init
-    init(dependencies: Dependencies) {
+    init(dependencies: Dependencies, placeName: String) {
         self.dependencies = dependencies
+        self.placeName = placeName
     }
     
     // MARK: - Public Methods
+    func reloadData() {
+        self.didStartUpdating?()
+        makeAPIRequest()
+
+    }
+    
     func viewWillDisappear() {
-        delegate?.viewWillDisappear()
+        delegate?.weatherDetailsViewModel()
+    }
+    
+    // MARK: - Private Methods
+    private func makeAPIRequest() {
+        dependencies.apiClient.getWeatherInfoViaCityName(placeName) { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }

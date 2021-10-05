@@ -26,7 +26,7 @@ class WorldMapCoordinator: Coordinator {
         self.childCoordinators = []
         self.rootNavigationController = navigationController
     }
-
+    
     // MARK: - Lifecycle
     func start() {
         let worldMapViewModel = WorldMapViewModel(dependencies: dependencies)
@@ -39,9 +39,6 @@ class WorldMapCoordinator: Coordinator {
         rootNavigationController.setViewControllers([worldMapViewController], animated: false)
     }
     
-    // MARK: - Public Methods
-    // MARK: - Private Methods
-
 }
 
 // MARK: - WorldMapViewModelDelegate
@@ -53,4 +50,5 @@ extension WorldMapCoordinator: WorldMapViewModelDelegate {
         childCoordinators.append(weatherForecastCoordinator)
         weatherForecastCoordinator.start()
     }
+    
 }

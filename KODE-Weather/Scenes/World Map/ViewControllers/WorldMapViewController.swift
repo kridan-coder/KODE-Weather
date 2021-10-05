@@ -11,7 +11,6 @@ import SnapKit
 
 class WorldMapViewController: UIViewController {
     // MARK: - Properties
-    
     private let viewModel: WorldMapViewModel
     
     private let mapView: MKMapView
@@ -25,22 +24,15 @@ class WorldMapViewController: UIViewController {
     private var pickViewIsShown = false
     
     // MARK: - Init
-    
     init(viewModel: WorldMapViewModel) {
         self.viewModel = viewModel
         
         mapView = MapView()
         pickPlaceView = PickPlaceView()
         searchController = UISearchController()
-        
         activityIndicator = UIActivityIndicatorView(style: .large)
-        foregroundView = {
-            let view = UIView()
-            view.backgroundColor = .darkGray
-            view.layer.opacity = 0.4
-            view.isHidden = true
-            return view
-        }()
+        foregroundView = UIView.foregroundBlur
+        foregroundView.isHidden = true
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,7 +42,6 @@ class WorldMapViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = R.string.localizable.map()
