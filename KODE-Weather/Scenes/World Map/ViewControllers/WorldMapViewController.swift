@@ -75,6 +75,21 @@ class WorldMapViewController: UIViewController {
         viewModel.needsPickPlaceViewHidden = { [weak self] in
             self?.hidePickPlaceView()
         }
+        viewModel.didReceiveError = { [weak self] error in
+            self?.showAlertWithError(error)
+            self?.stopLoading()
+        }
+    }
+    
+    private func showAlertWithError(_ error: Error) {
+        let alert: UIAlertController
+        if let customError = error as? CustomError {
+            alert = UIAlertController.buildWithOkayButton(title: customError.errorTitle,
+                                                          message: customError.localizedDescription)
+        } else {
+            alert = UIAlertController.buildWithOkayButton(message: error.localizedDescription)
+        }
+        present(alert, animated: true)
     }
     
     private func blockUserInteraction() {

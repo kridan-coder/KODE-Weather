@@ -19,33 +19,22 @@ final class WeatherDetailsView: UIView {
     
     private let equasionHelper: EquasionHelper
     
-    private let button: UIButton
-    
     // MARK: - Init
     init() {
         activityIndicator = UIActivityIndicatorView(style: .large)
         circleView = UIView()
         bigImageView = UIImageView()
         stackView = UIStackView()
-        
-        stackViewSubviews = [DegreesView(), IconView(), KeyValueView(), KeyValueView(), KeyValueView()]
+        stackViewSubviews = []
         
         equasionHelper = EquasionHelper()
-        
-        button = UIButton(type: .system)
-        button.setTitle("Hello!", for: .normal)
 
         super.init(frame: CGRect.zero)
-        
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc private func buttonPressed() {
-        animateViews()
     }
     
     // MARK: - Public Methods
@@ -53,6 +42,18 @@ final class WeatherDetailsView: UIView {
         createConstraints()
         self.layoutIfNeeded()
         initializeUI()
+    }
+    
+    func setupBigImageView(with image: UIImage?) {
+        bigImageView.image = image
+    }
+    
+    func setupStackViewSubviews(with stackViewSubviews: [UIView]) {
+        self.stackViewSubviews = stackViewSubviews
+    }
+    
+    func finishedLoadingData() {
+        animateViews()
     }
     
     // MARK: - Private Methods
@@ -70,23 +71,18 @@ final class WeatherDetailsView: UIView {
         circleView.addSubview(bigImageView)
         addSubview(stackView)
         
-        addSubview(button)
-        button.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         createCircleViewConstraints()
         createBigImageViewConstraints()
         createStackViewConstraints()
         createActivityIndicatorConstraints()
     }
     
-    private func fillStackView(with subviews: [UIView]) {
-        for view in subviews {
+    private func fillStackView() {
+        for view in stackViewSubviews {
             stackView.addArrangedSubview(view)
         }
         self.layoutIfNeeded()
-        for view in subviews {
+        for view in stackViewSubviews {
             stackView.addArrangedSubview(view)
             let maxWidthTop = equasionHelper.distanceToEdgeOfCircle(axisY: view.frame.minY + Constants.StackView.verticalInset,
                                                                     circle: Circumference(radius: circleView.frame.width / 2,
@@ -100,27 +96,10 @@ final class WeatherDetailsView: UIView {
                                                                        circle: Circumference(radius: circleView.frame.width / 2,
                                                                                              center: circleView.center)) - Double(Constants.StackView.horizontalInset)*2
             let finalMaxWidth = max(maxWidthTop, maxWidthBottom, maxWidthMiddle)
-             //   , Double(frame.width - Constants.StackView.horizontalInset*2)
-            print(maxWidthTop)
-            
-            print(maxWidthBottom)
-            
-            print(frame.width)
-            print(frame.height)
-            
-            print(view.frame.width)
-            
-            print(view.frame.height)
-            
-            print(view.frame.minY)
-            
-            print(view.frame.maxY)
 
-            
             view.snp.makeConstraints { make in
                 make.width.lessThanOrEqualTo(finalMaxWidth)
             }
-            //view.sizeToFit()
         }
         
     }
@@ -132,7 +111,6 @@ final class WeatherDetailsView: UIView {
     
     private func setupBigImageViewUI() {
         bigImageView.contentMode = .scaleAspectFill
-        bigImageView.image = UIImage(named: "ScatteredClouds")
     }
     
     private func setupStackViewUI() {
@@ -185,10 +163,11 @@ final class WeatherDetailsView: UIView {
             
         }, completion: { _ in
             UIView.animate(withDuration: 0.45) {
-                self.fillStackView(with: self.stackViewSubviews)
+                self.fillStackView()
                 self.stackView.snp.updateConstraints { make in
                     make.leading.equalToSuperview().inset(Constants.StackView.horizontalInset)
                 }
+                self.activityIndicator.stopAnimating()
                 self.layoutIfNeeded()
             }
             

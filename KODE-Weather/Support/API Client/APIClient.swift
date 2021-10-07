@@ -26,8 +26,10 @@ struct APIRoutable: URLRequestConvertible {
 }
 
 final class APIClient {
+    private let networkReachabilityManager = NetworkReachabilityManager()
+    
     private func isConnectedToNetwork() -> Bool {
-        return NetworkReachabilityManager()?.isReachable ?? false
+        return networkReachabilityManager?.isReachable ?? false
     }
     
     // GENERIC method
@@ -59,8 +61,8 @@ final class APIClient {
         perform(weatherInfoRoute, completion: completion)
     }
     
-    func generateIconLink(iconName: String) -> String {
-        return Constants.API.baseURL + "img/wn/\(iconName)@2x.png"
+    func generateIconLink(iconID: String) -> String {
+        return "http://openweathermap.org/img/wn/\(iconID)@2x.png"
     }
     
 }

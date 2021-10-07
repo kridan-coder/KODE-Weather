@@ -8,6 +8,13 @@
 import Foundation
 
 struct Main: Decodable {
+    let temperature: Double
     let humidity: Int
     let pressure: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case temperature = "temp"
+        case humidity
+        case pressure
+    }
 }

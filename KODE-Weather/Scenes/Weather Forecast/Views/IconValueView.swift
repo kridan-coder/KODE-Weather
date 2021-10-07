@@ -8,7 +8,10 @@
 import UIKit
 import Kingfisher
 
-final class IconView: UIView {
+final class IconValueView: UIView {
+    // MARK: - Properties
+    private var viewModel: IconValueViewModel?
+    
     private let iconLabel: UILabel
     private let iconView: UIImageView
     
@@ -22,15 +25,22 @@ final class IconView: UIView {
         createConstraints()
         
         iconView.contentMode = .scaleToFill
-        iconView.kf.setImage(with: URL(string: "http://openweathermap.org/img/wn/10d@2x.png"))
-        iconLabel.text = "Scattered \nClouds"
-        
-        
-
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Public Methods
+    func configure(with viewModel: IconValueViewModel) {
+        self.viewModel = viewModel
+        iconView.kf.setImage(with: URL(string: viewModel.iconLink))
+        iconLabel.text = viewModel.value
+        
+        viewModel.didUpdateData = {
+            self.iconView.kf.setImage(with: URL(string: viewModel.iconLink))
+            self.iconLabel.text = viewModel.value
+        }
     }
     
     // MARK: - Private Methods
@@ -38,15 +48,12 @@ final class IconView: UIView {
         iconLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         iconLabel.numberOfLines = 2
         iconLabel.textAlignment = .center
-        
-
         iconView.kf.indicatorType = .activity
     }
     
     private func createConstraints() {
         addSubview(iconLabel)
         addSubview(iconView)
-        //self.translatesAutoresizingMaskIntoConstraints = false
         iconLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(iconView.snp.bottom)
@@ -59,7 +66,6 @@ final class IconView: UIView {
             make.size.equalTo(75)
         }
         
-
         self.sizeToFit()
     }
 }

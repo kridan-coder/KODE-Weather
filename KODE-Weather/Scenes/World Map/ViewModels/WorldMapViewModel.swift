@@ -33,8 +33,8 @@ class WorldMapViewModel {
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
         self.mapViewModel = MapViewModel()
-        self.pickPlaceViewModel = PickPlaceViewModel(data: PickPlaceData(placeName: "Milan",
-                                                                         placeCoordinates: "45°16'44.7\"N 9°43'33.2\"E"))
+        self.pickPlaceViewModel = PickPlaceViewModel(data: PickPlaceData(placeName: R.string.localizable.dummyPlaceName(),
+                                                                         placeCoordinates: R.string.localizable.dummyPlaceCoordinates()))
         bindToMapViewModel()
         bindToPickPlaceViewModel()
     }

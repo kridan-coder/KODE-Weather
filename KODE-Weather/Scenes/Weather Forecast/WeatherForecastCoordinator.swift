@@ -51,7 +51,7 @@ class WeatherForecastCoordinator: Coordinator {
 
 // MARK: - WeatherDetailsViewModelDelegate
 extension WeatherForecastCoordinator: WeatherDetailsViewModelDelegate {
-    func weatherDetailsViewModel() {
+    func weatherDetailsViewModelWillDisappear() {
         rootNavigationController.navigationBar.prefersLargeTitles = false
         rootNavigationController.navigationBar.showShadow()
     }

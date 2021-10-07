@@ -8,6 +8,9 @@
 import UIKit
 
 final class KeyValueView: UIView {
+    // MARK: - Properties
+    private var viewModel: KeyValueViewModel?
+    
     private let keyLabel: UILabel
     private let valueLabel: UILabel
     
@@ -15,14 +18,12 @@ final class KeyValueView: UIView {
     init() {
         keyLabel = UILabel()
         valueLabel = UILabel()
-
+        
         super.init(frame: CGRect.zero)
         
         initializeUI()
         createConstraints()
         
-        keyLabel.text = "PRESSURE"
-        valueLabel.text = "763.53 mm Hg"
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +42,18 @@ final class KeyValueView: UIView {
         }
     }
     
+    // MARK: - Public Methods
+    func configure(with viewModel: KeyValueViewModel) {
+        self.viewModel = viewModel
+        keyLabel.text = viewModel.key
+        valueLabel.text = viewModel.value
+        
+        viewModel.didUpdateData = {
+            self.keyLabel.text = viewModel.key
+            self.valueLabel.text = viewModel.value
+        }
+    }
+    
     // MARK: - Private Methods
     private func initializeUI() {
         keyLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
@@ -50,10 +63,6 @@ final class KeyValueView: UIView {
     private func createConstraints() {
         addSubview(keyLabel)
         addSubview(valueLabel)
-        
-//        snp.makeConstraints { make in
-//            make.height.equalTo(self.snp.width)
-//        }
         
         keyLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -66,4 +75,5 @@ final class KeyValueView: UIView {
             make.bottom.equalToSuperview()
         }
     }
+    
 }
