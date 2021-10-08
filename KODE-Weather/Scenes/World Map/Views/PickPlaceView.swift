@@ -23,9 +23,12 @@ final class PickPlaceView: UIView {
         cancelButton = UIButton(type: .system)
         placeNameLabel = UILabel()
         placeCoordinatesLabel = UILabel()
+        
         super.init(frame: CGRect.zero)
+        
         cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         showWeatherButton.addTarget(self, action: #selector(showWeatherButtonPressed), for: .touchUpInside)
+        
         initializeUI()
         createConstraints()
     }
@@ -84,6 +87,7 @@ final class PickPlaceView: UIView {
         createPlaceCoordinatesLabelConstraints()
     }
     
+    // UI
     private func setupMainViewUI() {
         backgroundColor = .mainColor
         self.layer.cornerRadius = Constants.PickCityView.cornerRadius
@@ -116,24 +120,25 @@ final class PickPlaceView: UIView {
         placeCoordinatesLabel.textColor = .secondaryColor
     }
     
+    // Constraints
     private func createShowWeatherButtonConstraints() {
         showWeatherButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.defaultInset)
-            make.bottom.equalToSuperview().inset(Constants.smallInset)
+            make.leading.trailing.equalToSuperview().inset(Constants.defaultMediumInset)
+            make.bottom.equalToSuperview().inset(Constants.defaultSmallInset)
             make.height.equalTo(Constants.ShowWeatherButton.height)
         }
     }
     
     private func createPlaceNameLabelConstraints() {
         placeNameLabel.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().inset(Constants.defaultInset)
-            make.trailing.lessThanOrEqualTo(cancelButton.snp.leading).inset(-Constants.defaultInset)
+            make.leading.top.equalToSuperview().inset(Constants.defaultMediumInset)
+            make.trailing.lessThanOrEqualTo(cancelButton.snp.leading).inset(-Constants.defaultMediumInset)
         }
     }
     
     private func createCancelButtonConstraints() {
         cancelButton.snp.makeConstraints { make in
-            make.trailing.top.equalToSuperview().inset(Constants.defaultInset)
+            make.trailing.top.equalToSuperview().inset(Constants.defaultMediumInset)
             make.bottom.lessThanOrEqualTo(showWeatherButton.snp.top)
         }
     }
@@ -142,14 +147,18 @@ final class PickPlaceView: UIView {
         placeCoordinatesLabel.snp.makeConstraints { make in
             make.leading.equalTo(placeNameLabel)
             make.top.equalTo(placeNameLabel.snp.bottom).inset(-Constants.PlaceCoordinatesLabel.inset)
-            make.bottom.lessThanOrEqualTo(showWeatherButton.snp.top).inset(-Constants.defaultInset)
-            make.trailing.lessThanOrEqualTo(cancelButton.snp.leading).inset(-Constants.defaultInset)
+            make.bottom.lessThanOrEqualTo(showWeatherButton.snp.top).inset(-Constants.defaultMediumInset)
+            make.trailing.lessThanOrEqualTo(cancelButton.snp.leading).inset(-Constants.defaultMediumInset)
         }
     }
     
 }
 
+// MARK: - Constants
 private extension Constants {
+    static let defaultMediumInset = CGFloat(20)
+    static let defaultSmallInset = CGFloat(15)
+    
     struct PlaceNameLabel {
         static let linesAmount = 2
     }
@@ -172,6 +181,4 @@ private extension Constants {
         static let height = CGFloat(50)
     }
     
-    static let defaultInset = CGFloat(20)
-    static let smallInset = CGFloat(15)
 }

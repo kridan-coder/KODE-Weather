@@ -8,8 +8,8 @@
 import Foundation
 import CoreGraphics
 
-class EquasionHelper {
-    func distanceToEdgeOfCircle(axisY: CGFloat, circle: Circumference) -> Double {
+final class EquasionHelper {
+    static func distanceToEdgeOfCircle(axisY: CGFloat, circle: Circumference) -> Double {
         let radiusSquared = CGFloat(pow(circle.radius, 2))
         let squaredDifference = pow((axisY - circle.center.y), 2)
         let substraction = radiusSquared - squaredDifference

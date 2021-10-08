@@ -17,7 +17,8 @@ struct APIRoutable: URLRequestConvertible {
     var encoding: ParameterEncoding
     
     func asURLRequest() throws -> URLRequest {
-        let url = try (baseURL + path).asURL()
+        let spacelessString = (baseURL + path).replacingOccurrences(of: " ", with: "%20")
+        let url = try spacelessString.asURL()
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
         return try encoding.encode(urlRequest, with: parameters)
@@ -32,6 +33,19 @@ final class APIClient {
         return networkReachabilityManager?.isReachable ?? false
     }
     
+    private func handleStatusCode(response: HTTPURLResponse?) -> CustomError? {
+        switch response?.statusCode {
+        case 401:
+            return APIError.badAPIKey
+        case 404:
+            return APIError.notFound
+        case 429:
+            return APIError.tooManyRequests
+        default:
+            return nil
+        }
+    }
+    
     // GENERIC method
     private func perform<T: Decodable>(_ apiRoute: APIRoutable, completion: @escaping (Result<T, Error>) -> Void) {
         
@@ -39,7 +53,7 @@ final class APIClient {
             completion(.failure(APIError.noInternet))
             return
         }
-    
+        
         let dataRequest = AF.request(apiRoute)
         dataRequest
             .validate(statusCode: 200..<300)
@@ -48,11 +62,14 @@ final class APIClient {
                 case .success(let response):
                     completion(.success(response))
                 case .failure(let error):
-                    completion(.failure(error))
+                    if let customError = self.handleStatusCode(response: response.response) {
+                        completion(.failure(customError))
+                    } else {
+                        completion(.failure(error))
+                    }
                 }
-                
             }
-        }
+    }
     
     func getWeatherInfoViaCityName(_ cityName: String, completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
         let weatherInfoRoute = APIRoutable(path: "data/2.5/weather?q=\(cityName)&units=metric&appid=\(APIKey.key)",
@@ -62,7 +79,7 @@ final class APIClient {
     }
     
     func generateIconLink(iconID: String) -> String {
-        return "http://openweathermap.org/img/wn/\(iconID)@2x.png"
+        return Constants.API.iconURL + "\(iconID)@2x.png"
     }
     
 }

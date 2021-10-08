@@ -14,15 +14,15 @@ protocol Coordinator: AnyObject {
     
     func start()
     
-    func removeAllChildCoordinatorsWithType<T: Coordinator>(type: T.Type)
+    func removeAllChildCoordinatorsWithType<T: Coordinator>(_ type: T.Type)
     
 }
 
 extension Coordinator {
-    func removeAllChildCoordinatorsWithType<T: Coordinator>(type: T.Type) {
+    func removeAllChildCoordinatorsWithType<T: Coordinator>(_ type: T.Type) {
         childCoordinators = childCoordinators.filter { $0 is T == false }
     }
-
+    
 }
 
 extension Coordinator where Self: Equatable {

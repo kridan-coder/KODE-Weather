@@ -13,13 +13,13 @@ final class ValueView: UIView {
     
     private let degreesLabelText: UILabel
     private let degreesLabelScale: UILabel
-
+    
     // MARK: - Init
     init() {
         degreesLabelText = UILabel()
         degreesLabelScale = UILabel()
         degreesLabelScale.text = R.string.localizable.degrees()
-
+        
         super.init(frame: CGRect.zero)
         
         initializeUI()
@@ -42,12 +42,13 @@ final class ValueView: UIView {
     
     // MARK: - Private Methods
     private func initializeUI() {
-        degreesLabelText.font = UIFont.systemFont(ofSize: 90, weight: .bold)
-        degreesLabelText.numberOfLines = 1
-        degreesLabelText.textColor = UIColor(red: 0.21, green: 0.21, blue: 0.21, alpha: 1)
-        degreesLabelScale.font = UIFont.systemFont(ofSize: 35, weight: .regular)
-        degreesLabelScale.textColor = UIColor(red: 0.21, green: 0.21, blue: 0.21, alpha: 1)
+        degreesLabelText.font = .singleValueFont
+        degreesLabelText.numberOfLines = Constants.defaultLinesAmount
+        degreesLabelText.textColor = .nearBlackColor
+        degreesLabelScale.font = .degreesScaleFont
+        degreesLabelScale.textColor = .nearBlackColor
     }
+    
     private func createConstraints() {
         addSubview(degreesLabelText)
         addSubview(degreesLabelScale)
@@ -64,4 +65,9 @@ final class ValueView: UIView {
         }
     }
     
+}
+
+// MARK: - Constants
+private extension Constants {
+    static let defaultLinesAmount = 1
 }

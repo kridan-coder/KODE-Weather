@@ -25,6 +25,9 @@ final class MapView: MKMapView {
     // MARK: - Public Methods
     func configure(with viewModel: MapViewModel) {
         self.viewModel = viewModel
+        viewModel.shouldMoveToExactPlace = { [weak self] coordinate in
+            self?.setCenter(coordinate, animated: false)
+        }
     }
     
     // MARK: - Private Methods
@@ -32,4 +35,5 @@ final class MapView: MKMapView {
         setCameraZoomRange(Constants.Map.maximumZoomRange, animated: false)
         centerToLocation(Constants.Map.initialLocation)
     }
+    
 }

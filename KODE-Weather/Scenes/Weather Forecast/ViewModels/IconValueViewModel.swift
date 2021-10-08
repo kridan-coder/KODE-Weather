@@ -14,7 +14,7 @@ class IconValueViewModel: WeatherForecastCellIconValueViewModel {
     // MARK: - Properties
     var iconLink: String
     var value: String
-
+    
     var didUpdateData: (() -> Void)?
     
     private let dependencies: Dependencies
@@ -24,7 +24,6 @@ class IconValueViewModel: WeatherForecastCellIconValueViewModel {
         self.dependencies = dependencies
         self.iconLink = dependencies.apiClient.generateIconLink(iconID: iconID)
         self.value = value
-        print(iconLink)
     }
     
     // MARK: - Public Methods
@@ -33,4 +32,5 @@ class IconValueViewModel: WeatherForecastCellIconValueViewModel {
         self.value = value
         self.didUpdateData?()
     }
+    
 }

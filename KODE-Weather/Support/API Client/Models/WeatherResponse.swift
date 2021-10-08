@@ -25,4 +25,5 @@ struct WeatherResponse: Decodable {
         main = try? values.decode(Main.self, forKey: .main)
         wind = try? values.decode(Wind.self, forKey: .wind)
     }
+    
 }

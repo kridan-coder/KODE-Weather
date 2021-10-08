@@ -19,7 +19,7 @@ final class IconValueView: UIView {
     init() {
         iconLabel = UILabel()
         iconView = UIImageView()
-
+        
         super.init(frame: CGRect.zero)
         initializeUI()
         createConstraints()
@@ -45,8 +45,8 @@ final class IconValueView: UIView {
     
     // MARK: - Private Methods
     private func initializeUI() {
-        iconLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        iconLabel.numberOfLines = 2
+        iconLabel.font = .mini
+        iconLabel.numberOfLines = Constants.defaultLabelLinesAmount
         iconLabel.textAlignment = .center
         iconView.kf.indicatorType = .activity
     }
@@ -63,9 +63,15 @@ final class IconValueView: UIView {
         iconView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.size.equalTo(75)
+            make.size.equalTo(Constants.defaultIconSize)
         }
         
         self.sizeToFit()
     }
+}
+
+// MARK: - Constants
+private extension Constants {
+    static let defaultLabelLinesAmount = 2
+    static let defaultIconSize = CGFloat(75)
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct PickPlaceData {
-    var placeName: String
-    var placeCoordinates: String
+    var placeName: String = R.string.localizable.dummyPlaceName()
+    var placeCoordinates: String = R.string.localizable.dummyPlaceCoordinates()
     var showWeatherButtonTitle: String = R.string.localizable.showWeather()
 }

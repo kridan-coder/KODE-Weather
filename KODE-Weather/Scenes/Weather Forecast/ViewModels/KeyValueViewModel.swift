@@ -26,4 +26,5 @@ class KeyValueViewModel: WeatherForecastCellKeyValuesViewModel {
         self.value = value
         self.didUpdateData?()
     }
+    
 }

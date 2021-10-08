@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherForecastCoordinator: Coordinator {
+final class WeatherForecastCoordinator: Coordinator {
     // MARK: - Types
     typealias Dependencies = HasAPIClientProvider
     
@@ -22,8 +22,6 @@ class WeatherForecastCoordinator: Coordinator {
     
     private let dependencies: Dependencies
     
-    // MARK: - IBOutlets (всегда приватные)
-    
     // MARK: - Init
     init(placeName: String, dependencies: Dependencies, navigationController: UINavigationController) {
         self.dependencies = dependencies
@@ -32,7 +30,7 @@ class WeatherForecastCoordinator: Coordinator {
         self.placeName = placeName
     }
     
-    // MARK: - Lifecycle
+    // MARK: - Public Methods
     func start() {
         let weatherDetailsViewModel = WeatherDetailsViewModel(dependencies: dependencies, placeName: placeName)
         weatherDetailsViewModel.delegate = self
@@ -44,9 +42,7 @@ class WeatherForecastCoordinator: Coordinator {
         rootNavigationController.navigationBar.hideShadow()
         rootNavigationController.pushViewController(weatherDetailsViewController, animated: true)
     }
-    // MARK: - Public Methods
-    // MARK: - Actions (@ojbc + @IBActions)
-    // MARK: - Private Methods
+    
 }
 
 // MARK: - WeatherDetailsViewModelDelegate
@@ -54,5 +50,7 @@ extension WeatherForecastCoordinator: WeatherDetailsViewModelDelegate {
     func weatherDetailsViewModelWillDisappear() {
         rootNavigationController.navigationBar.prefersLargeTitles = false
         rootNavigationController.navigationBar.showShadow()
+        delegate?.removeAllChildCoordinatorsWithType(type(of: self))
     }
+    
 }

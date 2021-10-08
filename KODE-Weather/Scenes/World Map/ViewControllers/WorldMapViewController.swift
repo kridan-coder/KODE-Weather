@@ -13,15 +13,11 @@ class WorldMapViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: WorldMapViewModel
     
-    private let mapView: MKMapView
+    private let mapView: MapView
     private let pickPlaceView: PickPlaceView
-    
+    private let foregroundDimmerView: ForegroundDimmerView
     private let activityIndicator: UIActivityIndicatorView
-    private let foregroundView: UIView
-    
     private let searchController: UISearchController
-    
-    private var pickViewIsShown = false
     
     // MARK: - Init
     init(viewModel: WorldMapViewModel) {
@@ -29,10 +25,9 @@ class WorldMapViewController: UIViewController {
         
         mapView = MapView()
         pickPlaceView = PickPlaceView()
+        foregroundDimmerView = ForegroundDimmerView()
         searchController = UISearchController()
         activityIndicator = UIActivityIndicatorView(style: .large)
-        foregroundView = UIView.foregroundBlur
-        foregroundView.isHidden = true
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,33 +39,33 @@ class WorldMapViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backButtonTitle = R.string.localizable.map()
+        
         setupView()
         setupSearchController()
         setupGestureRecognizerForMap()
         bindToViewModel()
+        
+        navigationItem.backButtonTitle = R.string.localizable.map()
     }
     
-    // MARK: - Public Methods
-    
     // MARK: - Actions
-    
     @IBAction private func tappedOnMap(sender: UITapGestureRecognizer) {
         startLoading()
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
         viewModel.tappedAtLocation(locationCoordinate.clLocation)
-        self.pickViewIsShown = true
-
     }
     
     // MARK: - Private Methods
+    private func tappedAtSearchButton(with placeName: String) {
+        startLoading()
+        viewModel.tappedAtSearchButton(with: placeName)
+    }
     
     private func bindToViewModel() {
         viewModel.didFindPlace = { [weak self] in
             self?.showPickPlaceView()
             self?.stopLoading()
-            
         }
         viewModel.needsPickPlaceViewHidden = { [weak self] in
             self?.hidePickPlaceView()
@@ -82,14 +77,65 @@ class WorldMapViewController: UIViewController {
     }
     
     private func showAlertWithError(_ error: Error) {
-        let alert: UIAlertController
+        let title: String
         if let customError = error as? CustomError {
-            alert = UIAlertController.buildWithOkayButton(title: customError.errorTitle,
-                                                          message: customError.localizedDescription)
+            title = customError.errorTitle
         } else {
-            alert = UIAlertController.buildWithOkayButton(message: error.localizedDescription)
+            title = R.string.localizable.defaultErrorTitle()
         }
+        let alert = UIAlertController.buildAlertWithOneButton(title: title, message: error.localizedDescription)
         present(alert, animated: true)
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .mainColor
+        setupMapView()
+        setupPickPlaceView()
+        setupActivityIndicatorView()
+        setupForegroundDimmerView()
+    }
+    
+    private func startLoading() {
+        blockUserInteraction()
+        activityIndicator.startAnimating()
+        foregroundDimmerView.isHidden = false
+        navigationController?.navigationBar.layer.opacity = Constants.NavigationBar.opacityOnLoading
+    }
+    
+    private func stopLoading() {
+        allowUserInteraction()
+        activityIndicator.stopAnimating()
+        foregroundDimmerView.isHidden = true
+        navigationController?.navigationBar.layer.opacity = Constants.NavigationBar.opacityDefault
+    }
+    
+    private func showPickPlaceView() {
+        UIView.animate(withDuration: Constants.PickPlaceView.animationDuration) {
+            self.pickPlaceView.snp.updateConstraints { make in
+                make.bottom.equalToSuperview().inset(Constants.PickPlaceView.insetDefault)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func hidePickPlaceView() {
+        UIView.animate(withDuration: Constants.PickPlaceView.animationDuration) {
+            self.pickPlaceView.snp.updateConstraints { make in
+                make.bottom.equalTo(self.view.snp.bottom).inset(-Constants.PickPlaceView.insetHidden)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func setupSearchController() {
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+    }
+    
+    private func setupGestureRecognizerForMap() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
+        gestureRecognizer.numberOfTapsRequired = 1
+        mapView.addGestureRecognizer(gestureRecognizer)
     }
     
     private func blockUserInteraction() {
@@ -102,46 +148,7 @@ class WorldMapViewController: UIViewController {
         navigationController?.navigationBar.isUserInteractionEnabled = true
     }
     
-    private func startLoading() {
-        blockUserInteraction()
-        activityIndicator.startAnimating()
-        navigationController?.navigationBar.layer.opacity = 0.8
-        foregroundView.isHidden = false
-    }
-    
-    private func stopLoading() {
-        allowUserInteraction()
-        activityIndicator.stopAnimating()
-        foregroundView.isHidden = true
-        navigationController?.navigationBar.layer.opacity = 1
-    }
-    
-    private func showPickPlaceView() {
-        UIView.animate(withDuration: 0.3) {
-            self.pickPlaceView.snp.updateConstraints { make in
-                make.bottom.equalToSuperview().inset(20)
-            }
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func hidePickPlaceView() {
-        UIView.animate(withDuration: 0.3) {
-            self.pickPlaceView.snp.updateConstraints { make in
-                make.bottom.equalTo(self.view.snp.bottom).inset(-300)
-            }
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .mainColor
-        setupMapView()
-        setupPickPlaceView()
-        setupActivityIndicatorView()
-        setupForegroundView()
-    }
-    
+    // Setup Views
     private func setupActivityIndicatorView() {
         view.addSubview(activityIndicator)
         activityIndicator.snp.makeConstraints { make in
@@ -149,21 +156,22 @@ class WorldMapViewController: UIViewController {
         }
     }
     
-    private func setupForegroundView() {
-        view.addSubview(foregroundView)
-        foregroundView.snp.makeConstraints { make in
+    private func setupForegroundDimmerView() {
+        foregroundDimmerView.isHidden = true
+        view.addSubview(foregroundDimmerView)
+        foregroundDimmerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
     private func setupPickPlaceView() {
         view.addSubview(pickPlaceView)
-        pickPlaceView.configure(with: viewModel.pickPlaceViewModel)
         pickPlaceView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.bottom.equalTo(view.snp.bottom).inset(-300)
-            make.height.greaterThanOrEqualToSuperview().dividedBy(3.5)
+            make.leading.trailing.equalToSuperview().inset(Constants.PickPlaceView.insetDefault)
+            make.bottom.equalTo(view.snp.bottom).inset(-Constants.PickPlaceView.insetHidden)
+            make.height.greaterThanOrEqualToSuperview().dividedBy(Constants.PickPlaceView.heightDivision)
         }
+        pickPlaceView.configure(with: viewModel.pickPlaceViewModel)
     }
     
     private func setupMapView() {
@@ -171,19 +179,44 @@ class WorldMapViewController: UIViewController {
         mapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    private func setupSearchController() {
-        navigationItem.searchController = searchController
-        searchController.delegate = self
-    }
-    
-    private func setupGestureRecognizerForMap() {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnMap(sender:)))
-        gestureRecognizer.numberOfTapsRequired = 1
-        mapView.addGestureRecognizer(gestureRecognizer)
+        mapView.configure(with: viewModel.mapViewModel)
     }
     
 }
 
-extension WorldMapViewController: UISearchControllerDelegate {}
+// MARK: - UISearchBarDelegate
+extension WorldMapViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            hideSearchBar(withPlaceholder: text)
+            tappedAtSearchButton(with: text)
+        }
+    }
+    
+    // SearchBar Helpers
+    private func hideSearchBar(withPlaceholder placeholder: String?) {
+        searchController.searchBar.placeholder = placeholder
+        searchController.searchBar.showsScopeBar = false
+        searchController.searchBar.endEditing(true)
+        searchController.isActive = false
+    }
+    
+}
+
+// MARK: - Constants
+private extension Constants {
+    struct NavigationBar {
+        static let opacityOnLoading = Float(0.8)
+        static let opacityDefault = Float(1)
+    }
+    
+    struct PickPlaceView {
+        static let insetDefault = CGFloat(20)
+        static let insetHidden = CGFloat(300)
+        
+        static let heightDivision = CGFloat(3.5)
+        
+        static let animationDuration = 0.3
+    }
+    
+}

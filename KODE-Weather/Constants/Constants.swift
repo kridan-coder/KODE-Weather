@@ -5,9 +5,6 @@
 //  Created by Developer on 27.09.2021.
 //
 
-import Foundation
-import CoreLocation
-import CoreGraphics
 import MapKit
 
 struct Constants {
@@ -18,6 +15,7 @@ struct Constants {
     }
     struct API {
         static let baseURL = "https://api.openweathermap.org/"
+        static let iconURL = "http://openweathermap.org/img/wn/"
     }
     
 }

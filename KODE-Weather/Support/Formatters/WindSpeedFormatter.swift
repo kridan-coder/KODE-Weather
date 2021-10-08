@@ -12,4 +12,5 @@ final class WindSpeedFormatter: Formatter {
         let speed = Int(parameter)
         return "\(speed) \(R.string.localizable.metersPerSec())"
     }
+    
 }

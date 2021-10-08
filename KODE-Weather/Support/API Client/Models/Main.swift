@@ -17,4 +17,5 @@ struct Main: Decodable {
         case humidity
         case pressure
     }
+    
 }

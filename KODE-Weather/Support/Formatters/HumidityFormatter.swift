@@ -11,4 +11,5 @@ final class HumidityFormatter: Formatter {
     static func format(parameter: Double) -> String {
         return "\(Int(parameter))%"
     }
+    
 }

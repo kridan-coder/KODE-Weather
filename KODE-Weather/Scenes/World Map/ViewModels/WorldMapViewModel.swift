@@ -32,9 +32,10 @@ class WorldMapViewModel {
     // MARK: - Init
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
-        self.mapViewModel = MapViewModel()
-        self.pickPlaceViewModel = PickPlaceViewModel(data: PickPlaceData(placeName: R.string.localizable.dummyPlaceName(),
-                                                                         placeCoordinates: R.string.localizable.dummyPlaceCoordinates()))
+        
+        mapViewModel = MapViewModel()
+        pickPlaceViewModel = PickPlaceViewModel(data: PickPlaceData())
+        
         bindToMapViewModel()
         bindToPickPlaceViewModel()
     }
@@ -43,6 +44,11 @@ class WorldMapViewModel {
     func tappedAtLocation(_ location: CLLocation) {
         self.didStartUpdating?()
         mapViewModel.getDataAboutLocation(location)
+    }
+    
+    func tappedAtSearchButton(with placeName: String) {
+        self.didStartUpdating?()
+        mapViewModel.getDataAboutLocation(placeName)
     }
     
     // MARK: - Private Methods
@@ -65,4 +71,5 @@ class WorldMapViewModel {
             self.delegate?.worldMapViewModel(self, didRequestShowWeatherFor: self.pickPlaceViewModel.data.placeName)
         }
     }
+    
 }

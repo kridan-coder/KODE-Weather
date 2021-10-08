@@ -9,7 +9,6 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     // MARK: - Properties
-    
     let dependencies: AppDependencies
     
     var childCoordinators: [Coordinator]
@@ -19,7 +18,6 @@ final class AppCoordinator: Coordinator {
     private let window: UIWindow
     
     // MARK: - Init
-    
     init(window: UIWindow) {
         self.window = window
         
@@ -30,8 +28,7 @@ final class AppCoordinator: Coordinator {
         setupRootNavigationController()
     }
     
-    // MARK: - Lifecycle
-    
+    // MARK: - Public Methods
     func start() {
         window.rootViewController = rootNavigationController
         window.makeKeyAndVisible()
@@ -40,7 +37,6 @@ final class AppCoordinator: Coordinator {
     }
     
     // MARK: - Private Methods
-    
     private func showWorldMapScene() {
         let worldMapCoordinator = WorldMapCoordinator(dependencies: dependencies, navigationController: rootNavigationController)
         childCoordinators.append(worldMapCoordinator)

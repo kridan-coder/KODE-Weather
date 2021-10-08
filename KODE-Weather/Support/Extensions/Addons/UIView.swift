@@ -33,6 +33,7 @@ extension UIView {
         view.layer.opacity = Constants.Blur.opacity
         return view
     }
+    
 }
 
 private extension Constants {
@@ -47,4 +48,5 @@ private extension Constants {
         static let opacity = Float(0.4)
         static let color = UIColor.darkGray
     }
+    
 }

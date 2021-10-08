@@ -9,6 +9,7 @@ import Foundation
 
 final class WindDirectionFormatter: Formatter {
     static func format(parameter: Double) -> String {
-        return parameter.direction.rawValue
+        return parameter.direction.localizedString
     }
+    
 }

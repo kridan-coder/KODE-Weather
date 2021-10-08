@@ -28,7 +28,7 @@ extension UIColor {
         if UIScreen.main.traitCollection.userInterfaceStyle == .dark {
             return UIColor(red: 1, green: 1, blue: 1, alpha: 0.60)
         } else {
-            return UIColor.darkGray
+            return UIColor.darkGrayColor
         }
     }
     
@@ -43,4 +43,9 @@ extension UIColor {
     static var darkGrayColor: UIColor {
         return .darkGray
     }
+    
+    static var nearBlackColor: UIColor {
+        return UIColor(red: 0.21, green: 0.21, blue: 0.21, alpha: 1)
+    }
+    
 }

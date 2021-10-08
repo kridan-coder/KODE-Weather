@@ -16,7 +16,6 @@ class PickPlaceViewModel {
     }
     
     var didUpdateData: (() -> Void)?
-    
     var didPressCancelButton: (() -> Void)?
     var didPressShowWeatherButton: (() -> Void)?
     

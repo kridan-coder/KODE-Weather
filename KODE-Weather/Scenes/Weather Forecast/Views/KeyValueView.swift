@@ -23,23 +23,10 @@ final class KeyValueView: UIView {
         
         initializeUI()
         createConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func maxWidthForKeyLabel(width: Double) {
-        keyLabel.snp.updateConstraints { make in
-            make.width.equalTo(width)
-        }
-    }
-    
-    func maxWidthForValueLabel(width: Double) {
-        valueLabel.snp.updateConstraints { make in
-            make.width.equalTo(width)
-        }
     }
     
     // MARK: - Public Methods
@@ -56,8 +43,8 @@ final class KeyValueView: UIView {
     
     // MARK: - Private Methods
     private func initializeUI() {
-        keyLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        valueLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        keyLabel.font = .mini
+        valueLabel.font = .miniBold
     }
     
     private func createConstraints() {
@@ -67,7 +54,7 @@ final class KeyValueView: UIView {
         keyLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview()
-            make.bottom.equalTo(valueLabel.snp.top).inset(-5)
+            make.bottom.equalTo(valueLabel.snp.top).inset(-Constants.defaultInset)
         }
         
         valueLabel.snp.makeConstraints { make in
@@ -76,4 +63,9 @@ final class KeyValueView: UIView {
         }
     }
     
+}
+
+// MARK: - Constants
+private extension Constants {
+    static let defaultInset = CGFloat(5)
 }

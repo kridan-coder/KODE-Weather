@@ -21,7 +21,6 @@ class WeatherDetailsViewModel {
     var cellViewModels: [WeatherForecastCellViewModel]
     
     var placeName: String
-    
     var weatherID: Int
     
     var didStartUpdating: (() -> Void)?
@@ -88,16 +87,23 @@ class WeatherDetailsViewModel {
                                                     value: HumidityFormatter.format(parameter: Double(humidity))))
         }
         
-        if let windDirection = response.wind?.directionInDegrees, let windSpeed = response.wind?.speed {
-            cellViewModels.append(KeyValueViewModel(key: R.string.localizable.wind(),
-                                                    value: WindDirectionFormatter.format(parameter: Double(windDirection))
-                                                    + " "
-                                                    + WindSpeedFormatter.format(parameter: windSpeed)))
-        }
+        tryToBuildWindViewModel(with: response)
         
         if let pressure = response.main?.pressure {
             cellViewModels.append(KeyValueViewModel(key: R.string.localizable.pressure(),
                                                     value: PressureFormatter.format(parameter: Double(pressure))))
+        }
+    }
+    
+    private func tryToBuildWindViewModel(with response: WeatherResponse) {
+        if let windSpeed = response.wind?.speed {
+            var windDirectionString = ""
+            if let windDirection = response.wind?.directionInDegrees {
+                windDirectionString += WindDirectionFormatter.format(parameter: Double(windDirection)) + " "
+            }
+            cellViewModels.append(KeyValueViewModel(key: R.string.localizable.wind(),
+                                                    value: windDirectionString
+                                                        + WindSpeedFormatter.format(parameter: windSpeed)))
         }
     }
     

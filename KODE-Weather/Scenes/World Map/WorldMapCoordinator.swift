@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorldMapCoordinator: Coordinator {
+final class WorldMapCoordinator: Coordinator {
     // MARK: - Types
     typealias Dependencies = HasAPIClientProvider
     
@@ -27,7 +27,7 @@ class WorldMapCoordinator: Coordinator {
         self.rootNavigationController = navigationController
     }
     
-    // MARK: - Lifecycle
+    // MARK: - Public Methods
     func start() {
         let worldMapViewModel = WorldMapViewModel(dependencies: dependencies)
         worldMapViewModel.delegate = self

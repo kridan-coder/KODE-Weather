@@ -16,6 +16,9 @@ enum MapError: CustomError {
 }
 
 enum APIError: CustomError {
+    case tooManyRequests
+    case notFound
+    case badAPIKey
     case noInternet
     case basic
 }
@@ -29,6 +32,7 @@ extension MapError {
             return R.string.localizable.defaultErrorTitle()
         }
     }
+    
 }
 
 extension MapError: LocalizedError {
@@ -40,26 +44,39 @@ extension MapError: LocalizedError {
             return R.string.localizable.defaultErrorDescription()
         }
     }
+    
 }
 
 extension APIError {
     var errorTitle: String {
         switch self {
+        case .notFound:
+            return R.string.localizable.noSuchPlaceErrorTitle()
+        case .badAPIKey:
+            return R.string.localizable.badAPIKeyErrorTitle()
+        case .tooManyRequests:
+            return R.string.localizable.tooManyRequestsErrorTitle()
         case .noInternet:
             return R.string.localizable.noInternetErrorTitle()
         default:
             return R.string.localizable.defaultErrorTitle()
         }
     }
+    
 }
 
 extension APIError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .notFound:
+            return R.string.localizable.noSuchPlaceErrorDescription()
+        case .tooManyRequests:
+            return R.string.localizable.tooManyRequestsErrorDescription()
         case .noInternet:
             return R.string.localizable.noInternetErrorDescription()
         default:
             return R.string.localizable.defaultErrorDescription()
         }
     }
+    
 }

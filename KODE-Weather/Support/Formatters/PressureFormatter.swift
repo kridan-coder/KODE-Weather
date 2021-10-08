@@ -12,4 +12,5 @@ final class PressureFormatter: Formatter {
         let pressure = parameter / 1.33322387415
         return String(format: "%.2f", pressure) + " " + R.string.localizable.millimetreOfMercury()
     }
+    
 }
